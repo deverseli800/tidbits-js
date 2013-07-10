@@ -12,5 +12,5 @@ var Mongoose = require('mongoose');
 
 exports.UserSchema = new Mongoose.Schema({
   email : { type : String, required : true },
-  username { type : String }
+  username : { type : String }
 });

@@ -45,17 +45,102 @@ app.get('/', routes.index);
 app.get('/users', user.list);
 
 app.post('/order', function(req, res) {
-  if (req.body.side) {
-    if (req.body.side == "Buy") {
-
-    } else if (req.body.side == "Sell") {
-
+  var o = new Order(req.body);
+  o.validate(function(error) {
+    if (error) {
+      res.json({ error : 'Invalid order' });
     } else {
-      res.json({ error : 'Invalid side ' + req.body.side });
+      if (req.body.side == "Buy") {
+        Order.
+            find({ expiry : req.body.expiry, price : { $lte : req.body.price }, quantity : { $gte : req.body.quantity }, side : "Sell" }).
+            sort('price', 1).
+            sort('created', -1).
+            exec(function(error, orders) {
+              if (orders.length > 0) {
+                var trade = new Trade({ buy : o.user, sell : orders[0].user, price : orders[0].price, quantity : o.quantity, expiry : o.expiry });
+                var insertedTrade = false;
+                var savedOrder = false;
+
+                trade.save(function(error, trade) {
+                  if (savedOrder) {
+                    res.json({ matched : true, trade : trade });
+                  } else {
+                    insertedTrade = true;
+                  }
+                });
+
+                orders[0].quantity -= o.quantity;
+                if (orders[0].quantity == 0) {
+                  orders[0].remove(function(error) {
+                    if (insertedTrade) {
+                      res.json({ matched : true, trade : trade });
+                    } else {
+                      savedOrder = true;
+                    }
+                  });
+                } else {
+                  orders[0].save(function(error, order) {
+                    if (insertedTrade) {
+                      res.json({ matched : true, trade : trade });
+                    } else {
+                      savedOrder = true;
+                    }
+                  });
+                }
+              } else {
+                o.save(function(error, order) {
+                  res.json({ matched : false, order : order });
+                });
+              }
+            });
+      } else if (req.body.side == "Sell") {
+        Order.
+            find({ expiry : req.body.expiry, price : { $gte : req.body.price }, quantity : { $gte : req.body.quantity }, side : "Buy" }).
+            sort('price', -1).
+            sort('created', -1).
+            exec(function(error, orders) {
+              if (orders.length > 0) {
+                var trade = new Trade({ buy : o.user, sell : orders[0].user, price : orders[0].price, quantity : o.quantity, expiry : o.expiry });
+                var insertedTrade = false;
+                var savedOrder = false;
+
+                trade.save(function(error, trade) {
+                  if (savedOrder) {
+                    res.json({ matched : true, trade : trade });
+                  } else {
+                    insertedTrade = true;
+                  }
+                });
+
+                orders[0].quantity -= o.quantity;
+                if (orders[0].quantity == 0) {
+                  orders[0].remove(function(error) {
+                    if (insertedTrade) {
+                      res.json({ matched : true, trade : trade });
+                    } else {
+                      savedOrder = true;
+                    }
+                  });
+                } else {
+                  orders[0].save(function(error, order) {
+                    if (insertedTrade) {
+                      res.json({ matched : true, trade : trade });
+                    } else {
+                      savedOrder = true;
+                    }
+                  });
+                }
+              } else {
+                o.save(function(error, order) {
+                  res.json({ matched : false, order : order });
+                });
+              }
+            });
+      } else {
+        res.json({ error : 'Invalid side ' + req.body.side });
+      }
     }
-  } else {
-    res.json({ error : 'No side specified' });
-  }
+  });
 });
 
 http.createServer(app).listen(app.get('port'), function(){
