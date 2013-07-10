@@ -41,7 +41,7 @@ var Order = db.model('orders', OrderSchema);
 var TradeSchema = require('./models/Trade.js').TradeSchema;
 var Trade = db.model('trades', TradeSchema);
 
-app.get('/:username', function(req, res) {
+app.get('/place/:username', function(req, res) {
   User.findOne({ username : req.params.username }, function(error, user) {
     if (error || !user) {
       res.json({ error : 'User ' + req.params.username + ' not found' });
@@ -63,17 +63,36 @@ app.get('/new/user/:username/:email', function(req, res) {
   });
 });
 
+app.get('/orders.json', function(req, res) {
+  Order.find({}).sort({ 'price' : 1, 'date' : -1 }).exec(function(error, orders) {
+    if (error || !orders) {
+      res.json({ error : error });
+    } else {
+      res.json({ orders : orders });
+    }
+  });
+});
+
+app.get('/trades.json', function(req, res) {
+  Trade.find({}).sort({ 'date' : -1 }).exec(function(error, trades) {
+    if (error || !trades) {
+      res.json({ error : error });
+    } else {
+      res.json({ trades : trades });
+    }
+  });
+});
+
 app.post('/order', function(req, res) {
   var o = new Order(req.body);
   o.validate(function(error) {
     if (error) {
-      res.json({ error : 'Invalid order' });
+      res.json({ error : error });
     } else {
       if (req.body.side == "Buy") {
         Order.
             find({ expiry : req.body.expiry, price : { $lte : req.body.price }, quantity : { $gte : req.body.quantity }, side : "Sell" }).
-            sort('price', 1).
-            sort('created', -1).
+            sort({ 'price' : 1, 'created' : -1 }).
             exec(function(error, orders) {
               if (orders.length > 0) {
                 var trade = new Trade({ buy : o.user, sell : orders[0].user, price : orders[0].price, quantity : o.quantity, expiry : o.expiry });
@@ -115,8 +134,7 @@ app.post('/order', function(req, res) {
       } else if (req.body.side == "Sell") {
         Order.
             find({ expiry : req.body.expiry, price : { $gte : req.body.price }, quantity : { $gte : req.body.quantity }, side : "Buy" }).
-            sort('price', -1).
-            sort('created', -1).
+            sort({ 'price' : -1, 'created' : -1 }).
             exec(function(error, orders) {
               if (orders.length > 0) {
                 var trade = new Trade({ sell : o.user, buy : orders[0].user, price : orders[0].price, quantity : o.quantity, expiry : o.expiry });
