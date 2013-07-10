@@ -1,7 +1,12 @@
 doctype 5
-html
+html(ng-app)
   head
-    title= title
+    title Tidbits Test
     link(rel='stylesheet', href='/stylesheets/style.css')
+
+    script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.js')
+
+    block head
+
   body
     block content

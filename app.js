@@ -41,8 +41,27 @@ var Order = db.model('orders', OrderSchema);
 var TradeSchema = require('./models/Trade.js').TradeSchema;
 var Trade = db.model('trades', TradeSchema);
 
-app.get('/', routes.index);
+app.get('/:username', function(req, res) {
+  User.findOne({ username : req.params.username }, function(error, user) {
+    if (error || !user) {
+      res.json({ error : 'User ' + req.params.username + ' not found' });
+    } else {
+      res.render('index', { user : user });
+    }
+  });
+});
 app.get('/users', user.list);
+
+app.get('/new/user/:username/:email', function(req, res) {
+  var u = new User({ username : req.params.username, email : req.params.email });
+  u.save(function(error, user) {
+    if (error || !user) {
+      res.json({ error : error });
+    } else {
+      res.json({ user : user });
+    }
+  });
+});
 
 app.post('/order', function(req, res) {
   var o = new Order(req.body);
@@ -100,7 +119,7 @@ app.post('/order', function(req, res) {
             sort('created', -1).
             exec(function(error, orders) {
               if (orders.length > 0) {
-                var trade = new Trade({ buy : o.user, sell : orders[0].user, price : orders[0].price, quantity : o.quantity, expiry : o.expiry });
+                var trade = new Trade({ sell : o.user, buy : orders[0].user, price : orders[0].price, quantity : o.quantity, expiry : o.expiry });
                 var insertedTrade = false;
                 var savedOrder = false;
 

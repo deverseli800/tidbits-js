@@ -1,5 +1,23 @@
 extends layout
 
+block head
+  script(type="text/javascript")
+    function SampleController($scope, $http) {
+      $scope.order = {
+        price : 0,
+        quantity : 0,
+        side : "Buy",
+        expiry : new Date(2013, 8, 15)
+      };
+
+      $scope.user = {};
+      $scope.setUser = function(user) {
+        $scope.user = user;
+        $scope.order.user = user._id;
+      };
+    }
+
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Tidbits Test
+  div(ng-controller="SampleController", ng-init="setUser( #{JSON.stringify(user)} )")
+    | {{user.username}}
