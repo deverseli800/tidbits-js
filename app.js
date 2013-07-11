@@ -46,13 +46,13 @@ app.get('/place/:username', function(req, res) {
     if (error || !user) {
       res.json({ error : 'User ' + req.params.username + ' not found' });
     } else {
-      res.render('index', { user : user });
+      res.render('place', { user : user });
     }
   });
 });
 
 app.get('/', function(req, res) {
-  res.render('index', { user : user });
+  res.render('index', { title : 'Title' });
 });
 
 app.get('/users', user.list);
