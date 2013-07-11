@@ -50,6 +50,11 @@ app.get('/place/:username', function(req, res) {
     }
   });
 });
+
+app.get('/', function(req, res) {
+  res.render('index', { user : user });
+});
+
 app.get('/users', user.list);
 
 app.get('/new/user/:username/:email', function(req, res) {
