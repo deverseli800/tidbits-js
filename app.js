@@ -29,6 +29,33 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+var apiKey = process.env.APIKEY || "bf62be61fba4984a1d627a30270de0717a345beea9a2c39681f28382c552290a";
+
+var coinbase = {
+  requestBitcoins : function(email, amount, callback) {
+    request.post({ url : 'https://coinbase.com/api/v1/transactions/request_money?api_key=' + apiKey,
+        json : { from : email, amount : amount, notes : "Tidbits" } },
+        function(error, response, body) {
+          if (body.success) {
+            callback(null, true);
+          } else {
+            callback({ error : body }, null);
+          }
+        });
+  },
+  sendBitcoins : function(email, amount, callback) {
+    request.post({ url : 'https://coinbase.com/api/v1/transactions/send_money?api_key=' + apiKey,
+        json : { to : email, amount : amount, notes : "Tidbits" } },
+        function(error, response, body) {
+          if (body.success) {
+            callback(null, true);
+          } else {
+            callback({ error : body }, null);
+          }
+        });
+  }
+};
+
 var Mongoose = require('mongoose');
 var db = Mongoose.createConnection('localhost', 'tidbits');
 
@@ -88,100 +115,130 @@ app.get('/trades.json', function(req, res) {
   });
 });
 
+var executeTrade = function(trade, callback) {
+  console.log("Requesting! " + trade.sell.email);
+  coinbase.requestBitcoins(trade.sell.email, trade.quantity, function(error, result) {
+    if (error || !result) {
+      callback(error, null);
+    } else {
+      coinbase.sendBitcoins(trade.buy.email, trade.quantity, function(error, result) {
+        callback(error, result);
+      });
+    }
+  });
+};
+
 app.post('/order', function(req, res) {
   var o = new Order(req.body);
-  o.validate(function(error) {
-    if (error) {
-      res.json({ error : error });
-    } else {
-      if (req.body.side == "Buy") {
-        Order.
-            find({ expiry : req.body.expiry, price : { $lte : req.body.price }, quantity : { $gte : req.body.quantity }, side : "Sell" }).
-            sort({ 'price' : 1, 'created' : -1 }).
-            exec(function(error, orders) {
-              if (orders.length > 0) {
-                var trade = new Trade({ buy : o.user, sell : orders[0].user, price : orders[0].price, quantity : o.quantity, expiry : o.expiry });
-                var insertedTrade = false;
-                var savedOrder = false;
-
-                trade.save(function(error, trade) {
-                  if (savedOrder) {
-                    res.json({ matched : true, trade : trade });
-                  } else {
-                    insertedTrade = true;
-                  }
-                });
-
-                orders[0].quantity -= o.quantity;
-                if (orders[0].quantity == 0) {
-                  orders[0].remove(function(error) {
-                    if (insertedTrade) {
-                      res.json({ matched : true, trade : trade });
-                    } else {
-                      savedOrder = true;
-                    }
-                  });
-                } else {
-                  orders[0].save(function(error, order) {
-                    if (insertedTrade) {
-                      res.json({ matched : true, trade : trade });
-                    } else {
-                      savedOrder = true;
-                    }
-                  });
-                }
-              } else {
-                o.save(function(error, order) {
-                  res.json({ matched : false, order : order });
-                });
-              }
-            });
-      } else if (req.body.side == "Sell") {
-        Order.
-            find({ expiry : req.body.expiry, price : { $gte : req.body.price }, quantity : { $gte : req.body.quantity }, side : "Buy" }).
-            sort({ 'price' : -1, 'created' : -1 }).
-            exec(function(error, orders) {
-              if (orders.length > 0) {
-                var trade = new Trade({ sell : o.user, buy : orders[0].user, price : orders[0].price, quantity : o.quantity, expiry : o.expiry });
-                var insertedTrade = false;
-                var savedOrder = false;
-
-                trade.save(function(error, trade) {
-                  if (savedOrder) {
-                    res.json({ matched : true, trade : trade });
-                  } else {
-                    insertedTrade = true;
-                  }
-                });
-
-                orders[0].quantity -= o.quantity;
-                if (orders[0].quantity == 0) {
-                  orders[0].remove(function(error) {
-                    if (insertedTrade) {
-                      res.json({ matched : true, trade : trade });
-                    } else {
-                      savedOrder = true;
-                    }
-                  });
-                } else {
-                  orders[0].save(function(error, order) {
-                    if (insertedTrade) {
-                      res.json({ matched : true, trade : trade });
-                    } else {
-                      savedOrder = true;
-                    }
-                  });
-                }
-              } else {
-                o.save(function(error, order) {
-                  res.json({ matched : false, order : order });
-                });
-              }
-            });
-      } else {
-        res.json({ error : 'Invalid side ' + req.body.side });
-      }
+  User.findOne({ _id : req.body.user }, function(error, user) {
+    if (error || !user) {
+      console.log("user not found");
+      return;
     }
+
+    o.validate(function(error) {
+      if (error) {
+        res.json({ error : error });
+      } else {
+        if (req.body.side == "Buy") {
+          Order.
+              find({ expiry : req.body.expiry, price : { $lte : req.body.price }, quantity : { $gte : req.body.quantity }, side : "Sell" }).
+              sort({ 'price' : 1, 'created' : -1 }).
+              populate('user').
+              exec(function(error, orders) {
+                if (orders.length > 0) {
+                  var t = { buy : user, sell : orders[0].user, price : orders[0].price, quantity : o.quantity, expiry : o.expiry };
+                  var trade = new Trade(t);
+                  var insertedTrade = false;
+                  var savedOrder = false;
+
+                  executeTrade(t, function(error, result) {
+                    trade.save(function(error, trade) {
+                      if (savedOrder) {
+                        res.json({ matched : true, trade : trade });
+                      } else {
+                        insertedTrade = true;
+                      }
+                    });
+                  });
+
+                  orders[0].quantity -= o.quantity;
+                  if (orders[0].quantity == 0) {
+                    orders[0].remove(function(error) {
+                      if (insertedTrade) {
+                        res.json({ matched : true, trade : trade });
+                      } else {
+                        savedOrder = true;
+                      }
+                    });
+                  } else {
+                    orders[0].save(function(error, order) {
+                      if (insertedTrade) {
+                        res.json({ matched : true, trade : trade });
+                      } else {
+                        savedOrder = true;
+                      }
+                    });
+                  }
+                } else {
+                  o.save(function(error, order) {
+                    res.json({ matched : false, order : order });
+                  });
+                }
+              });
+        } else if (req.body.side == "Sell") {
+          Order.
+              find({ expiry : req.body.expiry, price : { $gte : req.body.price }, quantity : { $gte : req.body.quantity }, side : "Buy" }).
+              sort({ 'price' : -1, 'created' : -1 }).
+              populate('user').
+              exec(function(error, orders) {
+                if (orders.length > 0) {
+                  console.log(JSON.stringify(o));
+                  console.log(JSON.stringify(orders[0]));
+                  var t = { sell : user, buy : orders[0].user, price : orders[0].price, quantity : o.quantity, expiry : o.expiry };
+                  var trade = new Trade(t);
+                  var insertedTrade = false;
+                  var savedOrder = false;
+
+                  executeTrade(t, function(error, result) {
+                    trade.save(function(error, trade) {
+                      if (savedOrder) {
+                        res.json({ matched : true, trade : trade });
+                      } else {
+                        insertedTrade = true;
+                      }
+                    });
+                  });
+
+                  orders[0].quantity -= o.quantity;
+                  if (orders[0].quantity == 0) {
+                    orders[0].remove(function(error) {
+                      if (insertedTrade) {
+                        res.json({ matched : true, trade : trade });
+                      } else {
+                        savedOrder = true;
+                      }
+                    });
+                  } else {
+                    orders[0].save(function(error, order) {
+                      if (insertedTrade) {
+                        res.json({ matched : true, trade : trade });
+                      } else {
+                        savedOrder = true;
+                      }
+                    });
+                  }
+                } else {
+                  o.save(function(error, order) {
+                    res.json({ matched : false, order : order });
+                  });
+                }
+              });
+        } else {
+          res.json({ error : 'Invalid side ' + req.body.side });
+        }
+      }
+    });
   });
 });
 
