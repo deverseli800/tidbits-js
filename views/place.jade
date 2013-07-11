@@ -1,0 +1,40 @@
+extends layout
+
+block head
+  script(type="text/javascript")
+    function SampleController($scope, $http) {
+      $scope.order = {
+        price : 0,
+        quantity : 0,
+        side : "Buy",
+        expiry : new Date(2013, 8, 15, 0, 0, 0, 0)
+      };
+
+      $scope.user = {};
+      $scope.setUser = function(user) {
+        $scope.user = user;
+        $scope.order.user = user._id;
+      };
+
+      $scope.submit = function() {
+        $http.post('/order', $scope.order).success(function(data) {
+          alert(JSON.stringify(data));
+        });
+      };
+    }
+
+block content
+  h1 Tidbits Test
+  div(ng-controller="SampleController", ng-init="setUser( #{JSON.stringify(user)} )")
+    | Price
+    input(type="number", ng-model="order.price")
+    br
+    | Quantity
+    input(type="number", ng-model="order.quantity")
+    br
+    | Side
+    select(ng-model="order.side", ng-options="x for x in ['Buy', 'Sell']")
+    br
+    | Expiry
+    | {{order.expiry}}
+    div(ng-click="submit()", style="cursor: pointer; background-color: orange; width: 100px") Submit
