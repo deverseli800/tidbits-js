@@ -24,17 +24,22 @@ block head
     }
 
 block content
-  h1 Tidbits Test
-  div(ng-controller="SampleController", ng-init="setUser( #{JSON.stringify(user)} )")
-    | Price
-    input(type="number", ng-model="order.price")
-    br
-    | Quantity
-    input(type="number", ng-model="order.quantity")
-    br
-    | Side
-    select(ng-model="order.side", ng-options="x for x in ['Buy', 'Sell']")
-    br
-    | Expiry
-    | {{order.expiry}}
-    div(ng-click="submit()", style="cursor: pointer; background-color: orange; width: 100px") Submit
+  div.navbar
+        div.navbar-inner 
+          a.brand 
+            h2 Tidbits
+  div.container
+    h1 Tidbits Test
+    div(ng-controller="SampleController", ng-init="setUser( #{JSON.stringify(user)} )")
+      | Price
+      input(type="number", ng-model="order.price")
+      br
+      | Quantity
+      input(type="number", ng-model="order.quantity")
+      br
+      | Side
+      select(ng-model="order.side", ng-options="x for x in ['Buy', 'Sell']")
+      br
+      | Expiry
+      | {{order.expiry}}
+      div(ng-click="submit()", style="cursor: pointer; background-color: orange; width: 100px") Submit

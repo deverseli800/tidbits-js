@@ -1,8 +1,18 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.container {
+  font: 14px "Source Sans Pro", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.navbar {
+	background-color:#242424;
+}
+
+.brand h2{
+	font-family:"Quantico";
+	font-weight:400;
+	color:white;
+	text-shadow:none;
 }
