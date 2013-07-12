@@ -1,10 +1,11 @@
 body {
 	min-width:700px;
+	background-color:#2c2e31;
 }
 
 .container {
   font: 14px "Source Sans Pro", Helvetica, Arial, sans-serif;
-  border:1px blue solid;
+  border:1px transparent solid;
   width:95%;
 }
 
@@ -12,6 +13,16 @@ a {
   color: #00B7FF;
 }
 
+.boxTitle {
+	background-color:#323232;
+	color:white;
+	margin-top:0;
+}
+
+.boxTitle h4 {
+	font-weight:400;
+	padding:5px;
+}
 .navbar-inner {
 
 }
@@ -32,7 +43,12 @@ a {
 	text-shadow:none;
 }
 
-.span1, .span2, .span3, .span6 {
-	background-color:blue;
+#dashboard .span7, .span5 {
+	background-color:#232323;
+	padding:0;
+	margin:0;
 }
 
+#row1 {
+	color:white;
+}

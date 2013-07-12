@@ -12,11 +12,15 @@ block content
                 a Dashboard
               li 
                 a Team
-  div.container
+  div.container#dashboard
     br
     div.row-fluid#row1
-      div.span7.well span 1
-      div.span5.well span 2
+      div.span7 
+        div.boxTitle
+          h4 Order Book
+      div.span5
+        div.boxTitle
+          h4 Place an Order
         h1 Tidbits Test
         div(ng-controller="SampleController", ng-init="setUser( #{JSON.stringify(user)} )")
           | Price
@@ -28,8 +32,7 @@ block content
           | Side
           select(ng-model="order.side", ng-options="x for x in ['Buy', 'Sell']")
           br
-          | Expiry
-          | {{order.expiry}}
+          {{order.expiry}}
           div(ng-click="submit()", style="cursor: pointer; background-color: orange; width: 100px") Submit
     div.row-fluid#row2
       div.span4.well
