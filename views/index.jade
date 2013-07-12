@@ -1,17 +1,6 @@
 extends layout
 
 block content
-  div.navbar
-        div.navbar-inner
-          a.brand.pull-left Tidbits
-          div.pull-right
-            ul.nav
-              li 
-                a Home
-              li 
-                a Dashboard
-              li 
-                a Team
   div.container#dashboard
     br
     div.row-fluid#row1
@@ -21,7 +10,6 @@ block content
       div.span5
         div.boxTitle
           h4 Place an Order
-        h1 Tidbits Test
         div(ng-controller="SampleController", ng-init="setUser( #{JSON.stringify(user)} )")
           | Price
           input(type="number", ng-model="order.price")

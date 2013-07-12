@@ -1,6 +1,11 @@
 extends layout
 
+prepend head 
+  
+
+
 block head
+  script(type='text/javscript', href='/javascripts/heatmap.js')
   script(type="text/javascript")
     function SampleController($scope, $http) {
       $scope.order = {
@@ -23,18 +28,106 @@ block head
       };
     }
 
+
 block content
-  h1 Tidbits Test
-  div(ng-controller="SampleController", ng-init="setUser( #{JSON.stringify(user)} )")
-    | Price
-    input(type="number", ng-model="order.price")
+  div.container#dashboard
     br
-    | Quantity
-    input(type="number", ng-model="order.quantity")
     br
-    | Side
-    select(ng-model="order.side", ng-options="x for x in ['Buy', 'Sell']")
+    div.row-fluid#row1
+      div.span7.well
+        div.boxTitle
+          h4 Order Graphs
+          canvas(id="canvas")
+      div.span5.well
+        div.boxTitle
+          h4 Place an Order
+        div.boxBody(ng-controller="SampleController", ng-init="setUser( #{JSON.stringify(user)} )")
+          br
+          label Price
+          input(type="number", ng-model="order.price")
+          br
+          label Quantity
+          input(type="number", ng-model="order.quantity")
+          br
+          label  Side
+          select(ng-model="order.side", ng-options="x for x in ['Buy', 'Sell']")
+          br
+          | Expiry
+          | {{order.expiry}}
+          br
+          br
+          div.btn.btn-warning(ng-click="submit()", style="cursor: pointer; background-color: orange; width: 100px") Submit
     br
-    | Expiry
-    | {{order.expiry}}
-    div(ng-click="submit()", style="cursor: pointer; background-color: orange; width: 100px") Submit
+    br
+    div.row-fluid#row2
+      div.span4.well
+        div.boxTitle
+          h4 Spot Rates
+          div.boxBody#spotRates 
+            table.table
+              tbody
+                th Symbol
+                th Last Price
+                th Average 
+                th Volume
+                tr 
+                  td mtgoxUSD
+                  td 97
+                  td 91.35
+                  td 1,149,872.29
+                tr
+                  td bitstrampUSD
+                  td 95.64
+                  td 86.11
+                  td 352,595.82
+                tr 
+                  td btceSD
+                  td 88.5
+                  td 86.73
+                  td 174,434.91
+                tr 
+                 td btcnCNY
+                  td 573.02
+                  td 552.45
+                  td 143,998.76
+                tr 
+                  td mtgoxEUR
+                  td 74.19
+                  td 68.6
+                  td 129,279.02
+      
+      div.span4.well
+        div.boxTitle
+          h4 30-day Volume
+        div.boxBody
+          img(src="/images/graph.png")
+      div.span4.well
+        div.boxTitle
+          h4 Order Book
+        div.boxBody 
+          table.table
+            tbody
+              th Bid
+              th Price
+              th Ask
+              tr 
+                td 137
+                td 85
+                td 0
+              tr
+                td 122 
+                td 84
+                td 0
+              tr 
+                td 104
+                td 83
+                td 0
+              tr 
+                td 91
+                td 82
+                td 0
+              tr 
+                td 75
+                td 81
+                td 59
+    

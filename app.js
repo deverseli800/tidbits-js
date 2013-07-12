@@ -79,7 +79,7 @@ app.get('/place/:username', function(req, res) {
 });
 
 app.get('/', function(req, res) {
-  res.render('index', { title : 'Title' });
+  res.render('place', { title : 'Title' });
 });
 
 app.get('/users', user.list);

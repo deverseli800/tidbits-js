@@ -6,12 +6,55 @@ html(ng-app)
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href="http://fonts.googleapis.com/css?family=Quantico")
     link(rel='stylesheet', href="http://fonts.googleapis.com/css?family=Source+Sans+Pro")	
+    script(type='text/javscript', href='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
+    script(type='text/javscript', href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js')
     script(type='text/javscript', href='/javascripts/bootstrap.js')
-
-
     script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.js')
+    script(type='text/javscript', href='/javascripts/Chart.js')
 
     block head
 
   body
+    div.navbar
+        div.navbar-inner
+          div#logo.pull-left 
+            img(src="/images/bLogo.png")
+          a.brand.pull-left Mozaru
+          div.pull-right
+            ul.nav
+              li 
+                a Home
+              li 
+                a Dashboard
+              li 
+                a Team
     block content
+
+    script(type="text/javascript")
+      window.onload = function(){
+          // heatmap configuration
+          var config = {
+              element: document.getElementById("heatmapArea"),
+              radius: 30,
+              opacity: 100,
+              legend: {
+                  position: 'br',
+                  title: 'Example Distribution'
+              }   
+          };
+          //creates and initializes the heatmap
+          var heatmap = h337.create(config);
+       
+          // let's get some data
+          var data = {
+              max: 20,
+              data: [
+                  { x: 10, y: 20, count: 18 },
+                  { x: 25, y: 25, count: 14 },
+                  { x: 50, y: 30, count: 20 }
+                  // ...
+              ]
+          };
+          
+          heatmap.store.setDataSet(data);
+      };
