@@ -2,23 +2,39 @@ extends layout
 
 block content
   div.navbar
-        div.navbar-inner 
-          a.brand 
-            h2 Tidbits
+        div.navbar-inner
+          a.brand.pull-left Tidbits
+          div.pull-right
+            ul.nav
+              li 
+                a Home
+              li 
+                a Dashboard
+              li 
+                a Team
   div.container
-    h1 Tidbits Test
-    div(ng-controller="SampleController", ng-init="setUser( #{JSON.stringify(user)} )")
-      | Price
-      input(type="number", ng-model="order.price")
-      br
-      | Quantity
-      input(type="number", ng-model="order.quantity")
-      br
-      | Side
-      select(ng-model="order.side", ng-options="x for x in ['Buy', 'Sell']")
-      br
-      | Expiry
-      | {{order.expiry}}
-      div(ng-click="submit()", style="cursor: pointer; background-color: orange; width: 100px") Submit
+    br
+    div.row-fluid#row1
+      div.span7.well span 1
+      div.span5.well span 2
+        h1 Tidbits Test
+        div(ng-controller="SampleController", ng-init="setUser( #{JSON.stringify(user)} )")
+          | Price
+          input(type="number", ng-model="order.price")
+          br
+          | Quantity
+          input(type="number", ng-model="order.quantity")
+          br
+          | Side
+          select(ng-model="order.side", ng-options="x for x in ['Buy', 'Sell']")
+          br
+          | Expiry
+          | {{order.expiry}}
+          div(ng-click="submit()", style="cursor: pointer; background-color: orange; width: 100px") Submit
+    div.row-fluid#row2
+      div.span4.well
+      div.span4.well
+      div.span4.well
 
+   
 

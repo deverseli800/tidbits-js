@@ -1,18 +1,38 @@
+body {
+	min-width:700px;
+}
+
 .container {
   font: 14px "Source Sans Pro", Helvetica, Arial, sans-serif;
+  border:1px blue solid;
+  width:95%;
 }
 
 a {
   color: #00B7FF;
 }
 
+.navbar-inner {
+
+}
 .navbar {
 	background-color:#242424;
+	height:55px;
+	padding-top:10px;
 }
 
-.brand h2{
+.nav ul {
+	color:blue;
+	border:1px blue solid;
+}
+.navbar .brand {
 	font-family:"Quantico";
 	font-weight:400;
 	color:white;
 	text-shadow:none;
 }
+
+.span1, .span2, .span3, .span6 {
+	background-color:blue;
+}
+
