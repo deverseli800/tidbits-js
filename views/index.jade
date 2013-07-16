@@ -3,8 +3,8 @@ extends layout
 block content
   div#homepage
     div.clockMeshBackground
-    div.container#homeContainer
-      div.row 
+    div#homeContainer
+      div.row-fluid 
         div#clockMeshWrap
           img#clockMeshImg(src='/images/clockMesh.png')
           div.leadingText
@@ -19,21 +19,22 @@ block content
       br
       div.benefitsWrap
         div.row-fluid
-          div.span4.benefits
-            img(src='/images/benefitsClock.png')
-            h4 Enter Bitcoin Forwards
-            p Buy and sell bitcoins in the future. Contracts are executed daily, weekly, and monthly. 
-              | Hedge against price risk or speculate on the price of bitcoin.
-
-          div.span4.benefits
-            img(src='/images/benefitsTools.png')
-            h4 Powerful Visualization Tools
-            p Not sure how much to hedge? Don't know if your order will be matched?
-              | Our tools make it easy to estimate your outcomes. 
-          div.span4.benefits
-            img(src='/images/benefitBell.png')
-            h4 Notifications 
-            p Set price notitifications to recieve emails when the spot price changes, 
-              | a certain order hits our order book, or when your order is matched. 
-       
+          row.span12
+            div.row-fluid
+              div.span4.benefits
+                img(src='/images/benefitsClock.png')
+                h4 Enter Bitcoin Forwards
+                p Buy and sell bitcoins in the future. Contracts are executed daily, weekly, and monthly. 
+                  | Hedge against price risk or speculate on the price of bitcoin.
+              div.span4.benefits
+                img(src='/images/benefitsTools.png')
+                h4 Powerful Visualization Tools
+                p Not sure how much to hedge? Don't know if your order will be matched?
+                  | Our tools make it easy to estimate your outcomes. 
+              div.span4.benefits
+                img(src='/images/benefitBell.png')
+                h4 Notifications 
+                p Set price notitifications to recieve emails when the spot price changes, 
+                  | a certain order hits our order book, or when your order is matched. 
+           
 

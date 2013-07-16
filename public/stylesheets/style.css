@@ -4,15 +4,19 @@ body {
 	font-size:16px;
 }
 
-.container {
+.container, .container-fluid {
   font-family:"Source Sans Pro", Helvetica, Arial, sans-serif;
-  width:95%;
-  color:rgb(239, 239, 239);
   min-width:700px;
 }
 
 a {
   color: #00B7FF;
+}
+
+#dashboard {
+	width:1170px;
+	margin:auto;
+	
 }
 
 #logo {
@@ -123,7 +127,8 @@ td:nth-child(2) {
 }
 /*------------------------------------------- home page ---------------------------------------------------------*/
 #homeContainer {
-	width:960px;
+	width:1170px;
+	margin:auto;
 }
 
 #homepage {
