@@ -8,7 +8,8 @@ body {
   font-family:"Source Sans Pro", Helvetica, Arial, sans-serif;
   min-width:700px;
   width:1170px;
-  margin:auto;}
+  margin:auto;
+}
 
 a {
   color: #00B7FF;
@@ -21,10 +22,17 @@ a {
 }
 
 #logo {
-	width:50px;
-	height:50px;
-	margin-top:-4px;
-	margin-right:10px;
+	position:absolute;
+	top:2px;
+
+}
+
+#logo img {
+	
+}
+
+.pull-left {
+	border:1px red solid;
 }
 
 .boxTitle {
@@ -45,6 +53,10 @@ a {
 	text-align:left;
 }
 
+.viewHeader {
+	font-weight:400;
+}
+
 .boxTitle img {
 	width:20px;
 	float:left;
@@ -57,6 +69,7 @@ a {
 	background-color:#242424;
 	height:55px;
 	padding-top:10px;
+
 }
 
 .nav ul {
@@ -68,6 +81,12 @@ a {
 	font-weight:400;
 	color:white;
 	text-shadow:none;
+}
+
+.brand {
+	width:155px;
+	padding-left:100px;
+	text-align: right;
 }
 
 #dashboard .span7, .span5, .span4 {
@@ -205,4 +224,25 @@ td:nth-child(2) {
 	font-weight:600;
 }
 
+/*------------------------------------------- team page ---------------------------------------------------------*/
 
+.teamTitle {
+	font-weight:300;
+	font-style:italic;
+}
+.teamMember {
+
+}
+
+.teamMember img {
+	margin-top:10px;
+
+}
+
+.nameDescription {
+
+}
+
+.teamMember h4 {
+	margin-bottom:5px;
+}
