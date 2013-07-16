@@ -82,6 +82,9 @@ app.get('/', function(req, res) {
   res.render('place', { title : 'Title' });
 });
 
+app.get('/index', function(req, res) {
+  res.render('index', {title: 'Home'});
+});
 app.get('/users', user.list);
 
 app.get('/new/user/:username/:email', function(req, res) {

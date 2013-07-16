@@ -1,5 +1,4 @@
 body {
-	min-width:700px;
 	background-image:url('/images/noisyBack.png'); 
 	background-repeat:repeat;
 	font-size:16px;
@@ -9,6 +8,7 @@ body {
   font-family:"Source Sans Pro", Helvetica, Arial, sans-serif;
   width:95%;
   color:rgb(239, 239, 239);
+  min-width:700px;
 }
 
 a {
@@ -27,11 +27,23 @@ a {
 	color:white;
 	margin-top:0;
 	color:#efefef;
+	height:40px;
+	padding-left:15px;
+	
 }
 
 .boxTitle h4 {
 	font-weight:400;
 	font-size:1.1em;
+	float:left;
+	margin-left:15px;
+	text-align:left;
+}
+
+.boxTitle img {
+	width:20px;
+	float:left;
+	margin-top:8px;
 }
 .navbar-inner {
 
@@ -109,3 +121,83 @@ td:nth-child(2) {
 	background-color:#232323;
 	border-top:1px #666 solid;
 }
+/*------------------------------------------- home page ---------------------------------------------------------*/
+#homeContainer {
+	width:960px;
+}
+
+#homepage {
+	width:100%;
+	height:800px;
+	background-color:#fff;
+}
+
+#clockMeshWrap img {
+	position:absolute;
+	float: none;
+	margin:auto;
+	right:0;
+	min-width:700px;
+	height:440px;
+}
+
+.clockMeshBackground {
+	width:100%;
+	height:440px;
+	height:440px;
+	background-color:#fcb040;
+	position:absolute;
+}
+
+.leadingText {
+	position:absolute;
+	font-family:"Source Sans Pro";
+	color:white;
+	font-weight:400;
+	font-size:1.2em;
+	margin-left:30px;
+	margin-top:70px;
+}
+
+.leadTitle h2{
+	font-size:1.5em;
+	font-family:"Quantico";
+	font-weight:normal;
+}
+
+.invite {
+	padding:5px;
+	background-color:#ff6600;
+	width:100px;
+	text-align:center;
+	font-size:0.8em;
+	position:relative;
+	margin:auto;	
+}
+
+.benefitsWrap {
+	width:100%;
+	height:50px;
+	color:blue;
+	position:relative;
+	top:500px;
+}
+
+
+
+.benefits img{
+	margin:auto;
+	display:block;
+	
+}
+
+.benefits {
+	background-color:transparent;
+	color:#666;
+}
+
+.benefits h4 {
+	text-align:center;
+}
+
+

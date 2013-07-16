@@ -36,10 +36,13 @@ block content
     div.row-fluid#row1
       div.span7.well
         div.boxTitle
-          h4 Order Graphs
-          canvas(id="canvas")
+          img(src="/images/barGraphIcon.png")
+          h4 Order Book Graphs
+        div.boxBody
+          img(src="/images/orderbook.png")
       div.span5.well
         div.boxTitle
+          img(src="/images/pencilIcon.png")
           h4 Place an Order
         div.boxBody(ng-controller="SampleController", ng-init="setUser( #{JSON.stringify(user)} )")
           br
@@ -62,47 +65,50 @@ block content
     div.row-fluid#row2
       div.span4.well
         div.boxTitle
+          img(src="/images/spotRateIcon.png")
           h4 Spot Rates
-          div.boxBody#spotRates 
-            table.table
-              tbody
-                th Symbol
-                th Last Price
-                th Average 
-                th Volume
-                tr 
-                  td mtgoxUSD
-                  td 97
-                  td 91.35
-                  td 1,149,872.29
-                tr
-                  td bitstrampUSD
-                  td 95.64
-                  td 86.11
-                  td 352,595.82
-                tr 
-                  td btceSD
-                  td 88.5
-                  td 86.73
-                  td 174,434.91
-                tr 
-                 td btcnCNY
-                  td 573.02
-                  td 552.45
-                  td 143,998.76
-                tr 
-                  td mtgoxEUR
-                  td 74.19
-                  td 68.6
-                  td 129,279.02
+        div.boxBody#spotRates 
+          table.table
+            tbody
+              th Symbol
+              th Last Price
+              th Average 
+              th Volume
+              tr 
+                td mtgoxUSD
+                td 97
+                td 91.35
+                td 1,149,872.29
+              tr
+                td bitstrampUSD
+                td 95.64
+                td 86.11
+                td 352,595.82
+              tr 
+                td btceSD
+                td 88.5
+                td 86.73
+                td 174,434.91
+              tr 
+               td btcnCNY
+                td 573.02
+                td 552.45
+                td 143,998.76
+              tr 
+                td mtgoxEUR
+                td 74.19
+                td 68.6
+                td 129,279.02
       
       div.span4.well
         div.boxTitle
+          img(src="/images/30DayIcon.png")
           h4 30-day Volume
         div.boxBody
           img(src="/images/graph.png")
       div.span4.well
         div.boxTitle
+          img(src="/images/orderBookIcon.png")
           h4 Order Book
         div.boxBody 
           table.table
