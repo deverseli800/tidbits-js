@@ -1,5 +1,5 @@
 body {
-	background-image:url('/images/noisyBack.png'); 
+
 	background-repeat:repeat;
 	font-size:16px;
 }
@@ -7,7 +7,8 @@ body {
 .container, .container-fluid {
   font-family:"Source Sans Pro", Helvetica, Arial, sans-serif;
   min-width:700px;
-}
+  width:1170px;
+  margin:auto;}
 
 a {
   color: #00B7FF;
@@ -132,7 +133,6 @@ td:nth-child(2) {
 }
 
 #homepage {
-	width:100%;
 	height:800px;
 	background-color:#fff;
 }
@@ -141,7 +141,6 @@ td:nth-child(2) {
 	position:absolute;
 	float: none;
 	margin:auto;
-	right:0;
 	min-width:700px;
 	height:440px;
 }
@@ -203,6 +202,7 @@ td:nth-child(2) {
 
 .benefits h4 {
 	text-align:center;
+	font-weight:600;
 }
 
 
