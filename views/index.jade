@@ -1,5 +1,15 @@
 extends layout
 
+prepend head 
+  
+
+block head
+  script(type="text/javascript") 
+      function CollapseDemoCtrl($scope) {
+        $scope.isCollapsed = false ;
+      };
+
+
 block content
   div.clockMeshBackground
   div.container-fluid#homepage
@@ -15,7 +25,28 @@ block content
               br
               | price risk or simply play the market. 
             br
-            div.invite Request invite
+            div.invite 
+              a.request Request invite
+          div.leadingText(ng-controller="CollapseDemoCtrl")
+            div.leadTitle 
+             h2 Sign Up 
+            div.leadText 
+              | We'll email you as soon as we're ready. 
+              br
+            br
+            form.form-horizontal.signUp
+              label.control-label Name 
+              div(collapse="isCollapsed").controls
+                input(type="text", placeholder="name")
+              br
+              label.control-label Email Address
+              div.controls
+                input(type="text", placeholder="your email")
+              div.controls
+                br
+                a.invite(ng-click="isCollapsed = !isCollapsed") Submit
+
+            
       br
       div.benefitsWrap
         div.row-fluid

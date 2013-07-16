@@ -79,11 +79,11 @@ app.get('/place/:username', function(req, res) {
 });
 
 app.get('/', function(req, res) {
-  res.render('place', { title : 'Title' });
+  res.render('index', { title : 'Home' });
 });
 
-app.get('/index', function(req, res) {
-  res.render('index', {title: 'Home'});
+app.get('/place', function(req, res) {
+  res.render('place', {title: 'Title'});
 });
 
 app.get('/team', function(req, res) {

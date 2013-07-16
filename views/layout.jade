@@ -2,16 +2,17 @@ doctype 5
 html(ng-app)
   head
     title Tidbits Test
+    script(type='text/javscript', href='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
+    script(type='text/javscript', href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js')
+    script(type='text/javscript', href='/javascripts/bootstrap.js')
+    script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.js')
+    script(type='text/javscript', href='/javascripts/ui-bootstrap-tpls-0.4.0.js')
+
     link(rel='stylesheet', href='/stylesheets/bootstrap.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Quantico:400,400italic,700,700italic')
     link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic')	
-    script(type='text/javscript', href='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
-    script(type='text/javscript', href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js')
-    script(type='text/javscript', href='/javascripts/bootstrap.js')
-    script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.js')
-    script(type='text/javscript', href='/javascripts/Chart.js')
-
+    
     block head
 
   body
@@ -23,11 +24,11 @@ html(ng-app)
           div.pull-right
             ul.nav
               li 
-                a Home
+                a(href="/") Home
               li 
-                a Dashboard
+                a(href="/place") Dashboard
               li 
-                a Team
+                a(href="/team") Team
     block content
 
     script(type="text/javascript")
