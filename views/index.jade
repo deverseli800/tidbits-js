@@ -1,14 +1,16 @@
 extends layout
 
 prepend head 
-  
 
 block head
-  script(type="text/javascript") 
-      function CollapseDemoCtrl($scope) {
-        $scope.isCollapsed = false ;
-      };
-
+  script(type='text/javascript') 
+    $(document).ready(function(){
+        $('#demo').click(function() {
+            alert('hits');
+            $(".collapse").collapse();
+          });
+        
+    });
 
 block content
   div.clockMeshBackground
@@ -27,7 +29,7 @@ block content
             br
             div.invite 
               a.request Request invite
-          div.leadingText(ng-controller="CollapseDemoCtrl")
+          div.leadingText
             div.leadTitle 
              h2 Sign Up 
             div.leadText 
@@ -36,7 +38,7 @@ block content
             br
             form.form-horizontal.signUp
               label.control-label Name 
-              div(collapse="isCollapsed").controls
+              div#demo.collapse.in.controls
                 input(type="text", placeholder="name")
               br
               label.control-label Email Address
@@ -44,7 +46,7 @@ block content
                 input(type="text", placeholder="your email")
               div.controls
                 br
-                a.invite(ng-click="isCollapsed = !isCollapsed") Submit
+                a.invite Submit
 
             
       br
@@ -67,5 +69,5 @@ block content
                 h4 Notifications 
                 p Set price notitifications to recieve emails when the spot price changes, 
                   | a certain order hits our order book, or when your order is matched. 
-           
+  
 
