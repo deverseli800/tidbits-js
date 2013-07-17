@@ -6,10 +6,12 @@ block head
   script(type='text/javascript') 
     $(document).ready(function(){
         $('#demo').click(function() {
-            alert('hits');
-            $(".collapse").collapse();
-          });
+           $(".collapse").collapse();
+         });
         
+        $('#demo').click(function() {
+          alert("hallo");
+         });
     });
 
 block content
@@ -36,9 +38,9 @@ block content
               | We'll email you as soon as we're ready. 
               br
             br
-            form.form-horizontal.signUp
+            form.form-horizontal.signUp.collapse.in
               label.control-label Name 
-              div#demo.collapse.in.controls
+              div.controls
                 input(type="text", placeholder="name")
               br
               label.control-label Email Address
@@ -46,7 +48,7 @@ block content
                 input(type="text", placeholder="your email")
               div.controls
                 br
-                a.invite Submit
+                a(href="#")#demo.invite Submit
 
             
       br
