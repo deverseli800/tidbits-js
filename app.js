@@ -5,6 +5,7 @@
 
 var express = require('express')
 	, http = require('http')
+  , MailChimpAPI = require('mailchimp').MailChimpAPI
   , request = require('request');
 
 var routes = require('./routes')
