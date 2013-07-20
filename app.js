@@ -32,6 +32,9 @@ if ('development' == app.get('env')) {
 
 var apiKey = process.env.APIKEY || "bf62be61fba4984a1d627a30270de0717a345beea9a2c39681f28382c552290a";
 
+var mailchimp = new MailChimpAPI(process.env.MAILCHIMP || "684a49b024c94f7303ee51ccbfc23c64-us7", { version : '1.3' });
+mailchimp.listId = process.env.MAILCHIMPLISTID || '94e1f79540';
+
 var coinbase = {
   requestBitcoins : function(email, amount, callback) {
     request.post({ url : 'https://coinbase.com/api/v1/transactions/request_money?api_key=' + apiKey,
@@ -91,6 +94,11 @@ app.get('/team', function(req, res) {
   res.render('team', {title: 'Team'});
 });
 
+app.post('/subscribe', function(req, res) {
+  mailchimp.listSubscribe({ id : mailchimp.listId, email_address : req.body.email }, function(error, data) {
+    res.json({ success : true });
+  });
+});
 
 app.get('/users', user.list);
 
