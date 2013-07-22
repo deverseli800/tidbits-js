@@ -1,21 +1,8 @@
 extends layout
 
-prepend head 
-
-block head
-  script(type='text/javascript') 
-    $(document).ready(function(){
-        $('#demo').click(function() {
-           $(".collapse").collapse();
-         });
-        
-        $('#demo').click(function() {
-          alert("hallo");
-         });
-    });
-
 block content
-  div.clockMeshBackground(ng-controller="showHideController")
+  
+  div.clockMeshBackground
   div.container-fluid#homepage
     div#homeContainer
       div.row-fluid 
@@ -38,7 +25,7 @@ block content
               | We'll email you as soon as we're ready. 
               br
             br
-            form.form-horizontal.signUp.collapse.in(method="POST", action="/subscribe", ng-hide="hide")
+            form.form-horizontal.signUp(method="POST", action="/subscribe", ng-controller="showHideController")
               label.control-label Name 
               div.controls
                 input(type="text", placeholder="name", name="name")
@@ -48,7 +35,7 @@ block content
                 input(type="text", placeholder="your email", name="email")
               div.controls
                 br
-                button#demo.invite Submit
+                button#demo.invite Submit {{butter}}
 
             
       br

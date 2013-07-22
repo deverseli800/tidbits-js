@@ -1,3 +1,6 @@
-function showHideForm($scope) {
-	$scope.hide= 'true';
+function showHideController($scope) {
+	
+	$scope.butter="3";	
 }
+
+alert("working");
