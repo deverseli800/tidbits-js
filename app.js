@@ -5,6 +5,7 @@
 
 var express = require('express')
 	, http = require('http')
+  , io = require('socket.io-client')
   , MailChimpAPI = require('mailchimp').MailChimpAPI
   , request = require('request');
 
@@ -60,6 +61,18 @@ var coinbase = {
   }
 };
 
+var mtGox = {};
+mtGox.lastBBO = { bid : 0, ask : 0 };
+
+// Point a socket to Mt Gox's streaming API
+var socket = io.connect('https://socketio.mtgox.com/mtgox');
+socket.on('message', function(message) {
+  if (message.channel_name == "ticker.BTCUSD") {
+    mtGox.lastBBO.bid = message.ticker.buy.value;
+    mtGox.lastBBO.ask = message.ticker.sell.value;
+  }
+});
+
 var Mongoose = require('mongoose');
 var db = Mongoose.createConnection('localhost', 'tidbits');
 
@@ -94,13 +107,19 @@ app.get('/team', function(req, res) {
   res.render('team', {title: 'Team'});
 });
 
+app.get('/mtgox.json', function(req, res) {
+  res.json(mtGox);
+});
+
 app.post('/subscribe', function(req, res) {
   mailchimp.listSubscribe({ id : mailchimp.listId, email_address : req.body.email }, function(error, data) {
     res.json({ success : true });
   });
 });
 
-app.get('/users', user.list);
+app.get('/graphs', function(req, res) {
+  res.render('graphs', { title : 'Title' });
+});
 
 app.get('/new/user/:username/:email', function(req, res) {
   var u = new User({ username : req.params.username, email : req.params.email });

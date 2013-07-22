@@ -1,0 +1,66 @@
+extends layout
+
+prepend head
+  script(src="/javascripts/vendor/chart.js/chart.js")
+
+  script(type="text/javascript")
+    function GraphDataController($scope, $http) {
+      // Open orders
+      $scope.orders = {
+        orders : [],
+        update : function() {
+          $http.get('/orders.json').success(function(data) {
+            if (data.orders) {
+              $scope.orders.orders = data.orders;
+            } else {
+              alert("error " + data.error);
+            }
+          });
+        }
+      };
+      $scope.orders.update();
+
+      // Executed trades
+      $scope.trades = {
+        trades : [],
+        update : function() {
+          $http.get('/trades.json').success(function(data) {
+            if (data.trades) {
+              $scope.trades.trades = data.trades;
+            } else {
+              alert("error " + data.error);
+            }
+          });
+        }
+      };
+      $scope.trades.update();
+
+      // Mt Gox Prices
+      $scope.mtgox = {
+        lastBBO : {},
+        update : function() {
+          $http.get('/mtgox.json').success(function(data) {
+            if (data.lastBBO) {
+              $scope.mtgox.lastBBO = data.lastBBO;
+            } else {
+              alert("error - " + data.error);
+            }
+          });
+        }
+      };
+      $scope.mtgox.update();
+
+
+    }
+
+block content
+  div(ng-controller="GraphDataController")
+    div
+      | Orders
+      | {{orders.orders}}
+    div
+      | Trades
+      | {{trades.trades}}
+    div
+      | Mt. Gox
+      | {{mtgox.lastBBO}}
