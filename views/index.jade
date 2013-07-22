@@ -15,7 +15,7 @@ block head
     });
 
 block content
-  div.clockMeshBackground
+  div.clockMeshBackground(ng-controller="showHideController")
   div.container-fluid#homepage
     div#homeContainer
       div.row-fluid 
@@ -38,7 +38,7 @@ block content
               | We'll email you as soon as we're ready. 
               br
             br
-            form.form-horizontal.signUp.collapse.in(method="POST", action="/subscribe")
+            form.form-horizontal.signUp.collapse.in(method="POST", action="/subscribe", ng-hide="hide")
               label.control-label Name 
               div.controls
                 input(type="text", placeholder="name", name="name")
