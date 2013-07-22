@@ -32,13 +32,32 @@ prepend head
         }
       };
       $scope.trades.update();
+
+      $scope.mtgox = {
+        lastBBO : {},
+        update : function() {
+          $http.get('/mtgox.json').success(function(data) {
+            if (data.lastBBO) {
+              $scope.mtgox.lastBBO = data.lastBBO;
+            } else {
+              alert("error - " + data.error);
+            }
+          });
+        }
+      };
+      $scope.mtgox.update();
+
+
     }
 
 block content
   div(ng-controller="GraphDataController")
     div
       | Orders
-      | {{orders}}
+      | {{orders.orders}}
     div
       | Trades
-      | {{trades}}
+      | {{trades.trades}}
+    div
+      | Mt. Gox
+      | {{mtgox.lastBBO}}
