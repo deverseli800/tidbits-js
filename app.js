@@ -100,7 +100,9 @@ app.post('/subscribe', function(req, res) {
   });
 });
 
-app.get('/users', user.list);
+app.get('/graphs', function(req, res) {
+  res.render('graphs', { title : 'Title' });
+});
 
 app.get('/new/user/:username/:email', function(req, res) {
   var u = new User({ username : req.params.username, email : req.params.email });

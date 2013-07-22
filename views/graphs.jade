@@ -1,0 +1,44 @@
+extends layout
+
+prepend head
+  script(src="/javascripts/vendor/chart.js/chart.js")
+
+  script(type="text/javascript")
+    function GraphDataController($scope, $http) {
+      $scope.orders = {
+        orders : [],
+        update : function() {
+          $http.get('/orders.json').success(function(data) {
+            if (data.orders) {
+              $scope.orders.orders = data.orders;
+            } else {
+              alert("error " + data.error);
+            }
+          });
+        }
+      };
+      $scope.orders.update();
+
+      $scope.trades = {
+        trades : [],
+        update : function() {
+          $http.get('/trades.json').success(function(data) {
+            if (data.trades) {
+              $scope.trades.trades = data.trades;
+            } else {
+              alert("error " + data.error);
+            }
+          });
+        }
+      };
+      $scope.trades.update();
+    }
+
+block content
+  div(ng-controller="GraphDataController")
+    div
+      | Orders
+      | {{orders}}
+    div
+      | Trades
+      | {{trades}}
