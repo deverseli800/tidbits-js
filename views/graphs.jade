@@ -5,6 +5,7 @@ prepend head
 
   script(type="text/javascript")
     function GraphDataController($scope, $http) {
+      // Open orders
       $scope.orders = {
         orders : [],
         update : function() {
@@ -19,6 +20,7 @@ prepend head
       };
       $scope.orders.update();
 
+      // Executed trades
       $scope.trades = {
         trades : [],
         update : function() {
@@ -33,6 +35,7 @@ prepend head
       };
       $scope.trades.update();
 
+      // Mt Gox Prices
       $scope.mtgox = {
         lastBBO : {},
         update : function() {
