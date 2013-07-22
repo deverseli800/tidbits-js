@@ -1,0 +1,24 @@
+{
+  "name": "chart.js",
+  "version": "0.1.0",
+  "main": "chart.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "example"
+  ],
+  "dependencies": {
+    "raphael": "2.1.0"
+  },
+  "devDependencies": {},
+  "gitHead": "0b2890929e3368d9d1dce60c44100c9543b9bfff",
+  "readme": "chart.js\r\n========\r\n\r\n# Getting Started\r\nThe chart.js library is a graph library that enables you to create svg donut charts on your webpage with just a couple of lines of code. \r\n\r\n## Installation\r\nThe chart.js is a Bower package (which is in turn a [Node.js](http://nodejs.org/) package - you'll need that first), so you just need to install Bower -\r\n\r\n    npm install bower -g\r\n\r\nHaving done that, your next step is\r\n\r\n    bower install git@github.com:centralway/chart.js.git\r\n\r\nNext, reference the Chart.js source file\r\n\r\n    <script type=\"text/javascript\" src=\"../dist/chart.js\"></script>\r\n\r\n## Usage\r\nCreate a div in your html page with an id of your taste, on this particular case \"donutChart\". \r\nPaste the next snippet of javascript code:\r\n\r\n```javascript\r\n//creates the graph but doesn't displays it\r\nvar donut = new Donut({\r\n    innerRadius : 120,\r\n    outerRadius : 180,\r\n    canvasSize : {\r\n        width : 500,\r\n        height : 500 },\r\n    percentages : [75, 25],\r\n    sectorClasses : ['negative', 'neutral'],\r\n    mainText : 'Main',\r\n    secondaryText : 'Secondary',\r\n\r\n    //not mandatory, default values assigned\r\n    enableInteraction : true,\r\n    htmlReceptorID : 'donutChart',\r\n    mainTextClass : 'donutMainText',\r\n    secondaryTextClass : 'donutSecondaryText',\r\n    hasBlankSectors : true,\r\n    id : 'ID1'\r\n});\r\n\r\n//display the graph\r\ndonut.create();\r\n```\r\n\r\nAnd voilà! You have your graph. You can style the graph with css, using the classes you defined upon creation (\"mainTextClass\", \"seocndaryTextClass\", \"sectorClasses\")\r\n\r\n## Dependencies\r\nThe library depends on [raphaeljs](http://raphaeljs.com/) library which is \"a small JavaScript library that should simplify your work with vector graphics on the web.\" \r\n\r\n#### Example\r\nThe repository contains a very simple example on how to use the library, is just a simple html page with a script that creates a donut graph.\r\n\r\n### Unit tests\r\nIncoming!\r\n\r\n# Credits\r\nCopyright (c) 2013 by Centralway Factory AG.\r\n\r\n# Licensing Options\r\nThe Chart.js is licensed under free commercial and open source licenses for\r\napplication development, and a paid commercial license for OEM uses.\r\n\r\nSee LICENSE.txt for license.\r\n",
+  "readmeFilename": "README.md",
+  "_id": "chart.js@0.1.0",
+  "description": "chart.js\r ========",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/centralway/chart.js.git"
+  }
+}
