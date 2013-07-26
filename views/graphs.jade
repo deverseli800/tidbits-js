@@ -34,21 +34,24 @@ prepend head
         }
       };
       $scope.trades.update();
-
+      $scope.prices = ["5"];
       // Mt Gox Prices
       $scope.mtgox = {
+        
         lastBBO : {},
         update : function() {
           $http.get('/mtgox.json').success(function(data) {
             if (data.lastBBO) {
               $scope.mtgox.lastBBO = data.lastBBO;
+              $scope.prices.push($scope.mtgox.lastBBO);
             } else {
               alert("error - " + data.error);
             }
           });
         }
       };
-      $scope.mtgox.update();
+
+      setInterval(function() {$scope.mtgox.update();}, 5000);
 
 
     }
@@ -64,3 +67,4 @@ block content
     div
       | Mt. Gox
       | {{mtgox.lastBBO}}
+      | {{prices}}
