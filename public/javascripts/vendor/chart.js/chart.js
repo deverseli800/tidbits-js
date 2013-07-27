@@ -290,7 +290,7 @@ window.Chart = function(context){
             scaleOverride : false,
             scaleSteps : 25,
             scaleStepWidth : 0.2,
-            scaleStartValue : 90,
+            scaleStartValue : 93,
             scaleLineColor : "rgba(0,0,0,.1)",
             scaleLineWidth : 1,
             scaleShowLabels : true,

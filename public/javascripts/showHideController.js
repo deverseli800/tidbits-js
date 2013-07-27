@@ -1,11 +1,11 @@
 //graphy stuff
-function drawGraphs(ask, bid) {
+function drawGraphs(xLabels, ask, bid) {
   var barChartData = {
-    labels : ["January","February","March","April","May","June","July"],
+    labels : xLabels,
     datasets : [
       {
-        fillColor : "rgba(106,174,242,0.5)",
-        strokeColor : "rgba(106,174,242,0.5)",
+        fillColor : "rgba(106,174,242,0)",
+        strokeColor : "rgba(106,174,242,1)",
         data : ask
 
       },
@@ -53,6 +53,13 @@ function GraphDataController($scope, $http) {
   $scope.trades.update();
   $scope.pricesAsk = [];
   $scope.pricesBid=[];
+  $scope.xLabel=[];
+  
+  for (var i=0;i<31;i++) {
+    $scope.xLabel.push(i);
+    
+  }
+
   // Mt Gox Prices
   $scope.mtgox = {
     
@@ -63,7 +70,7 @@ function GraphDataController($scope, $http) {
           $scope.mtgox.lastBBO = data.lastBBO;
           $scope.pricesAsk.push($scope.mtgox.lastBBO.ask);
           $scope.pricesBid.push($scope.mtgox.lastBBO.bid);
-          drawGraphs($scope.pricesAsk, $scope.pricesBid);
+          drawGraphs($scope.xLabel, $scope.pricesAsk.slice(Math.max($scope.pricesAsk.length - 30, 0)), $scope.pricesBid.slice(Math.max($scope.pricesBid.length - 30, 0)));
         } else {
           alert("error - " + data.error);
         }
@@ -74,11 +81,9 @@ function GraphDataController($scope, $http) {
   
   
   setInterval(function() {$scope.mtgox.update();}, 1000);
+  
 }
 
-function showHideController($scope) {
 
-$scope.butter="3";  
-}
 
 
