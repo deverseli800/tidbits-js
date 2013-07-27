@@ -89,10 +89,7 @@ a {
 	background-repeat:repeat;
 }
 
-canvas {
-	width:100px;
-	height:350px;
-}
+
 
 .span4 {
 	border:1px green solid;
@@ -100,8 +97,13 @@ canvas {
 
 .span1, .span2, .span3, .span4, .span5, .span6, .span7, .span8, .span9, .span10, .span11, .span12 {
 	border:1px #ccc solid;
+	
 }
 
+.row-fluid [class*="span"] {
+	min-height:200px;
+
+}
 
 
 
@@ -218,3 +220,20 @@ form {
 	position:relative;
 	right:80px;
 }
+
+/*------------------------------------------- dashboard page ---------------------------------------------------------*/
+
+
+.tileHead {
+	border:1px green solid;
+	height:20%;
+	text-align:center;
+}
+
+.tileData {
+	height:80%;
+	font-size:2em;
+	text-align:center;
+	padding-top:30%;
+}
+

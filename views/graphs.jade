@@ -3,7 +3,9 @@ extends layout
 block content
   div.container-fluid(ng-controller="GraphDataController")
     div.row-fluid
-      canvas.span12#myChart(width=1170, height=500, id="myChart")
+      div.span12
+        p.tileHead Bid/Ask Real Time  
+        canvas#myChart(width=1170, height=350, id="myChart")
     div.row-fluid
       script(type='text/javascript', src='/javascripts/showHideController.js')
       div.row-fluid      
@@ -19,10 +21,10 @@ block content
                 th Expiry
             tbody
               tr(ng-repeat="order in orders.orders")
-                td {{order.created | date:'HH:MM:ss'}}
+                td {{order.created | date:'HH:mm:ss'}}
                 td {{order.price}}
                 td {{order.quantity}}
-                td {{order.expiry | date: 'HH:MM:ss'}}
+                td {{order.expiry | date: 'MM:HH:mm:ss'}}
         div.span6
           table.table.table-striped
             caption
@@ -35,10 +37,10 @@ block content
                 th Expiry
             tbody
               tr(ng-repeat="order in orders.orders")
-                td {{order.created | date:'HH:MM:ss'}}
+                td {{order.created | date:'HH:mm:ss'}}
                 td {{order.price}}
                 td {{order.quantity}}
-                td {{order.expiry | date: 'HH:MM:ss'}}
+                td {{order.expiry | date: 'MM:HH:mm:ss'}}
       div.row-fluid
         div.span6
           table.table.table-striped
@@ -64,4 +66,7 @@ block content
         div.span3
           div.tileHead Mt. Gox Spot- Bid
           div.tileData {{mtgox.lastBBO.bid}}
+        div.span3
+          div.titleHead UpDown
+          div.tileData {{upDown}}
         

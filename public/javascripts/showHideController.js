@@ -54,7 +54,11 @@ function GraphDataController($scope, $http) {
   $scope.pricesAsk = [];
   $scope.pricesBid=[];
   $scope.xLabel=[];
-  
+  //$scope.upDown= $scope.pricesAsk[pricesAsk.length-2]-$scope.pricesAsk[pricesAsk.length-1];
+
+
+
+  //this generates an array with our x labels 
   for (var i=0;i<31;i++) {
     $scope.xLabel.push(i);
     
@@ -70,7 +74,9 @@ function GraphDataController($scope, $http) {
           $scope.mtgox.lastBBO = data.lastBBO;
           $scope.pricesAsk.push($scope.mtgox.lastBBO.ask);
           $scope.pricesBid.push($scope.mtgox.lastBBO.bid);
+          //label the x axis of the chart 
           drawGraphs($scope.xLabel, $scope.pricesAsk.slice(Math.max($scope.pricesAsk.length - 30, 0)), $scope.pricesBid.slice(Math.max($scope.pricesBid.length - 30, 0)));
+          $scope.upDown= $scope.pricesAsk[$scope.pricesAsk.length-2]-$scope.pricesAsk[$scope.pricesAsk.length-1];
         } else {
           alert("error - " + data.error);
         }
@@ -79,8 +85,8 @@ function GraphDataController($scope, $http) {
   };
 
   
-  
-  setInterval(function() {$scope.mtgox.update();}, 1000);
+  $scope.mtgox.update();
+  setInterval(function() {$scope.mtgox.update();}, 10000);
   
 }
 
