@@ -13,6 +13,8 @@ var routes = require('./routes')
   , user = require('./routes/user')
   , path = require('path');
 
+var Coinbase = require('./routes/tools/Coinbase.js').Coinbase;
+
 var app = express();
 
 // all environments
@@ -30,6 +32,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+
+var coinbase2 = new Coinbase(request,
+    { clientId : 'd83375543a57d859221a56c78485dde9bddfea41999ea90ac74787b28075c02f',
+      clientSecret : 'ea155548bf07e32a2d8bdb23c31fb3b657675086e42fccf709f9def7c70ae06b'
+    });
 
 var apiKey = process.env.APIKEY || "bf62be61fba4984a1d627a30270de0717a345beea9a2c39681f28382c552290a";
 
@@ -149,6 +156,17 @@ app.get('/trades.json', function(req, res) {
     } else {
       res.json({ trades : trades });
     }
+  });
+});
+
+app.get('/oauth/coinbase/auth', function(req, res) {
+  res.redirect(coinbase2.getAuthUrl('http://localhost:3000/oauth/coinbase/callback'));
+});
+app.get('/oauth/coinbase/callback', function(req, res) {
+  coinbase2.handleCallback(req.query.code, function(error, accessToken, refreshToken) {
+    res.cookie('coinbaseAccessToken', accessToken);
+    res.cookie('coinbaseRefreshToken', refreshToken);
+    res.redirect('/');
   });
 });
 
