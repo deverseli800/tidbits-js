@@ -2,50 +2,66 @@ extends layout
 
 block content
   div.container-fluid(ng-controller="GraphDataController")
-    div.row
+    div.row-fluid
       canvas.span12#myChart(width=1170, height=500, id="myChart")
-    div.row
+    div.row-fluid
       script(type='text/javascript', src='/javascripts/showHideController.js')
-      div.span12  
-        div.row      
-          div.span6
-            table.table.table-striped
-              caption 
-                p Time and Sales
-              thead 
-                tr
-                  th Time
-                  th Price
-                  th Volume
-                  th Expiry
-                  th Side
-              tbody 
-                tr(ng-repeat="order in orders.orders")
-                  td {{order.created | date:'HH:MM:ss'}}
-                  td {{order.price}}
-                  td {{order.quantity}}
-                  td {{order.expiry | date:'HH:MM:ss'}}
-                  td {{order.side}}
-          div.span6
-            table.table.table-striped
-              caption
-                p Selling
-              thead
-                tr
-                  th Ask
-                  th Size
-                  th Sum
-              tbody
-                tr(ng-repeat="order in orders.orders")
-                  td {{order.created | date:'HH:MM:ss'}}
-                  td {{order.price}}
-                  td {{order.quantity}}
-                  td {{order.expiry}}
-
-        div
-          | Trades
-          | {{trades.trades}}
-        div
-          | Mt. Gox
-          | {{mtgox.lastBBO}}
-          | {{last5Ask}}
+      div.row-fluid      
+        div.span6
+          table.table.table-striped
+            caption
+              p Buying
+            thead
+              tr
+                th Bid
+                th Size
+                th Sum
+                th Expiry
+            tbody
+              tr(ng-repeat="order in orders.orders")
+                td {{order.created | date:'HH:MM:ss'}}
+                td {{order.price}}
+                td {{order.quantity}}
+                td {{order.expiry | date: 'HH:MM:ss'}}
+        div.span6
+          table.table.table-striped
+            caption
+              p Selling
+            thead
+              tr
+                th Ask
+                th Size
+                th Sum
+                th Expiry
+            tbody
+              tr(ng-repeat="order in orders.orders")
+                td {{order.created | date:'HH:MM:ss'}}
+                td {{order.price}}
+                td {{order.quantity}}
+                td {{order.expiry | date: 'HH:MM:ss'}}
+      div.row-fluid
+        div.span6
+          table.table.table-striped
+            caption 
+              p Time and Sales
+            thead 
+              tr
+                th Time
+                th Price
+                th Volume
+                th Expiry
+                th Side
+            tbody 
+              tr(ng-repeat="order in orders.orders")
+                td {{order.created | date:'HH:MM:ss'}}
+                td {{order.price}}
+                td {{order.quantity}}
+                td {{order.expiry | date:'HH:MM:ss'}}
+                td {{order.side}}
+        div.span3
+          div.tileHead Mt. Gox Spot- Ask
+          div.tileData {{mtgox.lastBBO.ask}}
+        div.span3
+          div.tileHead Mt. Gox Spot- Bid
+          div.tileData {{mtgox.lastBBO.bid}}
+        
