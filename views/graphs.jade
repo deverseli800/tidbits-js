@@ -1,62 +1,8 @@
 extends layout
 
-prepend head
-  script(src="/javascripts/vendor/chart.js/chart.js")
-
-  script(type="text/javascript")
-    function GraphDataController($scope, $http) {
-      // Open orders
-      $scope.orders = {
-        orders : [],
-        update : function() {
-          $http.get('/orders.json').success(function(data) {
-            if (data.orders) {
-              $scope.orders.orders = data.orders;
-            } else {
-              alert("error " + data.error);
-            }
-          });
-        }
-      };
-      $scope.orders.update();
-
-      // Executed trades
-      $scope.trades = {
-        trades : [],
-        update : function() {
-          $http.get('/trades.json').success(function(data) {
-            if (data.trades) {
-              $scope.trades.trades = data.trades;
-            } else {
-              alert("error " + data.error);
-            }
-          });
-        }
-      };
-      $scope.trades.update();
-      $scope.prices = ["5"];
-      // Mt Gox Prices
-      $scope.mtgox = {
-        
-        lastBBO : {},
-        update : function() {
-          $http.get('/mtgox.json').success(function(data) {
-            if (data.lastBBO) {
-              $scope.mtgox.lastBBO = data.lastBBO;
-              $scope.prices.push($scope.mtgox.lastBBO);
-            } else {
-              alert("error - " + data.error);
-            }
-          });
-        }
-      };
-
-      setInterval(function() {$scope.mtgox.update();}, 5000);
-
-
-    }
-
 block content
+  canvas#myChart(width=300, height=500, id="myChart")
+  script(type='text/javascript', src='/javascripts/showHideController.js')
   div(ng-controller="GraphDataController")
     div
       | Orders
@@ -67,4 +13,4 @@ block content
     div
       | Mt. Gox
       | {{mtgox.lastBBO}}
-      | {{prices}}
+      | {{pricesAsk}}
