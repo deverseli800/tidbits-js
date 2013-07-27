@@ -45,23 +45,12 @@ a {
 	
 }
 
-.boxTitle h4 {
-	font-weight:400;
-	font-size:1.1em;
-	float:left;
-	margin-left:15px;
-	text-align:left;
-}
 
 .viewHeader {
 	font-weight:400;
 }
 
-.boxTitle img {
-	width:20px;
-	float:left;
-	margin-top:8px;
-}
+
 .navbar-inner {
 
 }
@@ -89,12 +78,7 @@ a {
 	text-align: right;
 }
 
-#dashboard .span7, .span5, .span4 {
-	background-color:#323232;
-	padding:0;
-	margin:0;
-	border:none;
-}
+
 
 #row1 {
 	color:white;
@@ -110,41 +94,14 @@ canvas {
 	height:350px;
 }
 
-table {
-	color:#8e8c8c;
-}
-
-th {
-	color:white;
-	font-size:1em;
-	font-weight:bold;
-}
-.table th {
-	font-weight:400;
-}
-td:nth-child(1) {
-	color:#779f37;
+.span4 {
+	border:1px green solid;
 }
 
 
-td:nth-child(3) {
-	color:#e85140;
-}
 
-td:nth-child(2) {
-	color:white;
-	background-color:#666;
-	border-top:1px #323232 solid;
-}
 
-#spotRates td:nth-child(1), #spotRates td:nth-child(3), #spotRates td:nth-child(4) {
-	color:white;
-}
 
-#spotRates td:nth-child(2) {
-	background-color:#232323;
-	border-top:1px #666 solid;
-}
 /*------------------------------------------- home page ---------------------------------------------------------*/
 #homeContainer {
 	width:1170px;
