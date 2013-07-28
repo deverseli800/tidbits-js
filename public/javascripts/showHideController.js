@@ -21,6 +21,39 @@ function drawGraphs(xLabels, ask, bid) {
 var myLine = new Chart(document.getElementById("myChart").getContext("2d")).Line(barChartData);
 }
 
+// draw arrow for up/down 
+function drawGreenArrow(id) {
+	var canvas=document.getElementById(id);
+	var context= canvas.getContext("2d");
+		context.clearRect(0, 0, canvas.width, canvas.height);
+      context.beginPath();
+      context.moveTo(0, 40);
+      context.lineTo(20,10);
+      context.lineTo(40,40);
+      
+      context.closePath();
+      context.fillStyle = "rgba(126, 179, 72, 1)";
+      context.fill();
+      context.lineWidth = 1;
+}
+
+// draw red for up/down 
+function drawRedArrow(id) {
+	var canvas=document.getElementById(id);
+	var context= canvas.getContext("2d");
+	context.clearRect(0, 0, canvas.width, canvas.height);
+
+      context.beginPath();
+      context.moveTo(0, 10);
+      context.lineTo(20,40);
+      context.lineTo(40,10);
+      
+      context.closePath();
+      context.fillStyle = "red";
+      context.fill();
+      context.lineWidth = 1;
+}
+
 function GraphDataController($scope, $http) {
   // Open orders
   $scope.orders = {
@@ -50,11 +83,11 @@ function GraphDataController($scope, $http) {
       });
     }
   };
+
   $scope.trades.update();
-  $scope.pricesAsk = [];
-  $scope.pricesBid=[];
+  $scope.pricesAsk = [100];
+  $scope.pricesBid=[200,100];
   $scope.xLabel=[];
-  //$scope.upDown= $scope.pricesAsk[pricesAsk.length-2]-$scope.pricesAsk[pricesAsk.length-1];
 
 
 
@@ -76,7 +109,23 @@ function GraphDataController($scope, $http) {
           $scope.pricesBid.push($scope.mtgox.lastBBO.bid);
           //label the x axis of the chart 
           drawGraphs($scope.xLabel, $scope.pricesAsk.slice(Math.max($scope.pricesAsk.length - 30, 0)), $scope.pricesBid.slice(Math.max($scope.pricesBid.length - 30, 0)));
-          $scope.upDown= $scope.pricesAsk[$scope.pricesAsk.length-2]-$scope.pricesAsk[$scope.pricesAsk.length-1];
+          //draw arrows based on uptick or downtick for ask 
+          $scope.askUpDown= $scope.pricesAsk[$scope.pricesAsk.length-2]-$scope.pricesAsk[$scope.pricesAsk.length-1];
+          if ($scope.askUpDown>0) {
+          	drawRedArrow("arrow");
+          }
+          else {
+          	drawGreenArrow("arrow");
+          }
+          //draw arrows based on uptick or downtick for bid 
+          $scope.bidUpDown= $scope.pricesBid[$scope.pricesBid.length-2]-$scope.pricesBid[$scope.pricesBid.length-1];
+          if ($scope.bidUpDown>0) {
+          	drawRedArrow("arrow2");
+          }
+          else {
+          	drawGreenArrow("arrow2");
+          }
+                    
         } else {
           alert("error - " + data.error);
         }
@@ -86,7 +135,7 @@ function GraphDataController($scope, $http) {
 
   
   $scope.mtgox.update();
-  setInterval(function() {$scope.mtgox.update();}, 10000);
+  setInterval(function() {$scope.mtgox.update();}, 5000);
   
 }
 
