@@ -14,6 +14,12 @@ body {
 
 a {
   color: white;
+  text-shadow:none;
+}
+
+.navbar .nav>li>a {
+	text-shadow:none;
+
 }
 
 #dashboard {
@@ -53,13 +59,15 @@ a {
 
 
 .navbar-inner {
-
+	background-image:none;
+	background-color:#242424;
+	border:none;
 }
 .navbar {
 	background-color:#242424;
 	height:55px;
 	padding-top:10px;
-
+	margin-bottom:0px;
 }
 
 .nav ul {
@@ -71,12 +79,14 @@ a {
 	font-weight:400;
 	color:white;
 	text-shadow:none;
+	font-size:30px;
 }
 
 .brand {
 	width:155px;
 	padding-left:100px;
 	text-align: right;
+	font-size:30px;
 }
 
 
@@ -199,9 +209,7 @@ canvas {
 	font-weight:300;
 	font-style:italic;
 }
-.teamMember {
 
-}
 
 .teamMember img {
 	margin-top:10px;
