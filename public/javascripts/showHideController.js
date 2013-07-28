@@ -86,7 +86,7 @@ function GraphDataController($scope, $http) {
 
   $scope.trades.update();
   $scope.pricesAsk = [100];
-  $scope.pricesBid=[200,100];
+  $scope.pricesBid=[110,100];
   $scope.xLabel=[];
 
 

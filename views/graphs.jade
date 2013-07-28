@@ -4,7 +4,13 @@ block content
   div.container-fluid(ng-controller="GraphDataController")
     div.row-fluid
       div.span12.tile
-        p.tileHead Bid/Ask Real Time  
+        div.tileHead 
+          div.type
+            i.icon-signal
+          |Bid/Ask Real Time 
+          div.options
+            div.option
+              i.icon-cog       
         canvas#myChart(width=1170, height=350, id="myChart")
     div.row-fluid
       script(type='text/javascript', src='/javascripts/showHideController.js')
@@ -14,19 +20,17 @@ block content
             caption
               p Buying
             thead
-              tr
+              tr.buying
                 th Bid
                 th Size
                 th Sum
                 th Expiry
-                th side
             tbody
               tr(ng-repeat="order in orders.orders", ng-show="order.side =='Buy'")
                 td {{order.created | date:'HH:mm:ss'}}
                 td {{order.price}}
                 td {{order.quantity}}
                 td {{order.expiry | date: 'MM:HH:mm:ss'}}
-                td {{order.side}}
         div.span6.tile
           table.table.table-striped
             caption
@@ -37,7 +41,7 @@ block content
                 th Size
                 th Sum
                 th Expiry
-            tbody
+            tbody.selling
               tr(ng-repeat="order in orders.orders", ng-show="order.side=='Sell'")
                 td {{order.created | date:'HH:mm:ss'}}
                 td {{order.price}}
@@ -63,15 +67,27 @@ block content
                 td {{order.expiry | date:'HH:MM:ss'}}
                 td {{order.side}}
         div.span3.tile
-          div.tileHead Mt. Gox Spot- Ask
+          div.tileHead 
+            div.type
+             i.icon-info-sign
+            | Mt. Gox Spot- Ask
+            div.options
+              div.option
+                i.icon-cog
           div.tileData 
             canvas(width=40, height=40, id="arrow");
-            | {{mtgox.lastBBO.ask}}
+            | {{mtgox.lastBBO.ask | currency}}
         div.span3.tile
-          div.tileHead Mt. Gox Spot- Bid
+          div.tileHead 
+            div.type
+              i.icon-info-sign
+            | Mt. Gox Spot- Bid
+            div.options
+              div.option
+                i.icon-cog
           div.tileData
             canvas(width=40, height=40, id="arrow2");
-            | {{mtgox.lastBBO.bid}}
+            | {{mtgox.lastBBO.bid | currency }}
         div.span3.tile
           div.titleHead UpDown
           div.tileData {{askUpDown}}, {{bidUpDown}}

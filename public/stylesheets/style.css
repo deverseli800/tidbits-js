@@ -2,6 +2,7 @@ body {
 
 	background-repeat:repeat;
 	font-size:16px;
+	color:#444;
 }
 
 .container, .container-fluid {
@@ -223,16 +224,63 @@ form {
 /*------------------------------------------- dashboard page ---------------------------------------------------------*/
 
 
-.tileHead {
-	border:1px green solid;
+.tileHead, caption {
 	height:20%;
 	text-align:center;
+	font-weight:600;
+	font-size:1.1em;
+	border-bottom:1px #ccc solid;
+	background-color:#f1f1f1;
+
 }
+
+caption {
+	margin-top:5px;
+}
+
+
 
 .tileData {
 	height:80%;
 	font-size:2em;
 	text-align:center;
-	padding-top:30%;
+	padding-top:20%;
 }
 
+.table th, .table td {
+	border-top:#ccc solid 1px;
+}
+
+.buying th:nth-child(1){
+	color:rgba(126, 179, 72, 1);
+}
+
+.tile {
+	margin-top:5px;
+	margin-bottom: 5px;
+	border-radius:5px;
+}
+
+.options  {
+	float:right;
+	overflow:hidden;
+	padding-left:3px;
+	padding-right:3px;
+
+	
+}
+
+.option{
+	border-left:1px #ccc solid;
+	display: inline;	
+}
+
+.type {
+	float:left;
+	margin-left:5px;
+
+}
+	
+[class^="icon-"] {
+	margin-top: 3px;
+}
