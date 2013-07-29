@@ -37,6 +37,7 @@ function drawGreenArrow(id) {
       context.fillStyle = "rgba(126, 179, 72, 1)";
       context.fill();
       context.lineWidth = 1;
+
 }
 
 // draw red for up/down 
@@ -115,17 +116,21 @@ function GraphDataController($scope, $http) {
           $scope.askUpDown= $scope.pricesAsk[$scope.pricesAsk.length-2]-$scope.pricesAsk[$scope.pricesAsk.length-1];
           if ($scope.askUpDown>0) {
           	drawRedArrow("arrow");
+            $scope.askColor='red';
           }
           else {
           	drawGreenArrow("arrow");
+            $scope.askColor="green";
           }
           //draw arrows based on uptick or downtick for bid 
           $scope.bidUpDown= $scope.pricesBid[$scope.pricesBid.length-2]-$scope.pricesBid[$scope.pricesBid.length-1];
           if ($scope.bidUpDown>0) {
           	drawRedArrow("arrow2");
+            $scope.bidColor='red';
           }
           else {
           	drawGreenArrow("arrow2");
+            $scope.bidColor='green';
           }
                     
         } else {

@@ -295,3 +295,11 @@ caption {
 [class^="icon-"] {
 	margin-top: 3px;
 }
+
+.green {
+	color:rgba(126, 179, 72, 1);
+}
+
+.red {
+	color:red;	
+}

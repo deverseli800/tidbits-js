@@ -74,7 +74,7 @@ block content
             div.options
               div.option
                 i.icon-cog
-          div.tileData 
+          div.tileData(ng-class="askColor") 
             canvas(width=40, height=40, id="arrow");
             | {{mtgox.lastBBO.ask | currency}}
         div.span3.tile
@@ -85,7 +85,7 @@ block content
             div.options
               div.option
                 i.icon-cog
-          div.tileData
+          div.tileData(ng-class="bidColor") 
             canvas(width=40, height=40, id="arrow2");
             | {{mtgox.lastBBO.bid | currency }}
         div.span3.tile
