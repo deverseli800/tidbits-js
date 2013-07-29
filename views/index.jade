@@ -1,62 +1,55 @@
 extends layout
 
-block content
-  
-  div.clockMeshBackground
-  div.container-fluid#homepage
-    div#homeContainer
-      div.row-fluid 
-        div#clockMeshWrap
-          img#clockMeshImg(src='/images/clockMesh.png')
-          div.leadingText(ng-class="{ 'hidden': hideMe }")
-            div.leadTitle 
-             h2 Bitcoin Derivatives Trading.
-            div.leadText 
-              | Trade forwards and futures for bitcoin. Hedge 
-              br
-              | price risk or simply play the market. 
-            br
-            div.invite
-              a(ng-click="hideMe = ! hideMe; showMe = ! showMe;").request Request invite
-        div.leadingText(style=" display: none", ng-class="{ 'showMe' : showMe}") 
-          div.leadTitle 
-           h2 Sign Up 
-          div.leadText
-            | We'll email you as soon as we're ready. 
-            br
+block content  
+    div.clockMeshBackground
+    div.row-fluid#clockMeshWrap
+      img#clockMeshImg(src='/images/clockMesh.png')
+      div.leadingText(ng-class="{ 'hidden': hideMe }")
+        div.leadTitle 
+         h2 Bitcoin Derivatives Trading.
+        div.leadText 
+          | Trade forwards and futures for bitcoin. Hedge 
           br
-          form.form-horizontal.signUp(method="POST", action="/subscribe", ng-controller="showHideController")
-            label.control-label Name 
-            div.controls
-              input(type="text", placeholder="name", name="name")
+          | price risk or simply play the market. 
+        br
+        div.invite
+          a(ng-click="hideMe = ! hideMe; showMe = ! showMe;").request Request invite
+      div.leadingText(style=" display: none", ng-class="{ 'showMe' : showMe}") 
+        div.leadTitle 
+         h2 Sign Up 
+        div.leadText
+          | We'll email you as soon as we're ready. 
+          br
+        br
+        form.form-horizontal.signUp(method="POST", action="/subscribe", ng-controller="showHideController")
+          label.control-label Name 
+          div.controls
+            input(type="text", placeholder="name", name="name")
+          br
+          label.control-label Email Address
+          div.controls
+            input(type="text", placeholder="your email", name="email")
+          div.controls
             br
-            label.control-label Email Address
-            div.controls
-              input(type="text", placeholder="your email", name="email")
-            div.controls
-              br
-              button#demo.invite Submit
+            button#demo.invite Submit 
+    div.benefitsWrap
+      div.row-fluid
+        row.span12
+          div.row-fluid
+            div.span4.benefits
+              img(src='/images/benefitsClock.png')
+              h4 Enter Bitcoin Forwards
+              p Buy and sell bitcoins in the future. Contracts are settled daily, weekly, and monthly. 
+                | Hedge against price risk or speculate on the price of bitcoin.
+            div.span4.benefits
+              img(src='/images/benefitsTools.png')
+              h4 Powerful Visualization Tools
+              p Not sure how much to hedge? Don't know if your order will be matched?
+                | Our tools make it easy to estimate your outcomes. 
+            div.span4.benefits
+              img(src='/images/benefitBell.png')
+              h4 Notifications 
+              p Set price notitifications to recieve emails when the spot price changes, 
+                | a certain order hits our order book, or when your order is matched. 
 
-            
-      br
-      div.benefitsWrap
-        div.row-fluid
-          row.span12
-            div.row-fluid
-              div.span4.benefits
-                img(src='/images/benefitsClock.png')
-                h4 Enter Bitcoin Forwards
-                p Buy and sell bitcoins in the future. Contracts are settled daily, weekly, and monthly. 
-                  | Hedge against price risk or speculate on the price of bitcoin.
-              div.span4.benefits
-                img(src='/images/benefitsTools.png')
-                h4 Powerful Visualization Tools
-                p Not sure how much to hedge? Don't know if your order will be matched?
-                  | Our tools make it easy to estimate your outcomes. 
-              div.span4.benefits
-                img(src='/images/benefitBell.png')
-                h4 Notifications 
-                p Set price notitifications to recieve emails when the spot price changes, 
-                  | a certain order hits our order book, or when your order is matched. 
-  
 

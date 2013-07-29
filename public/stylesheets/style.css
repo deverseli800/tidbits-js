@@ -1,10 +1,12 @@
 body {
-
+	height:100%;
 	background-repeat:repeat;
 	font-size:16px;
 	color:#444;
 }
-
+html {
+	min-height:100%;
+}
 .container, .container-fluid {
   font-family:"Source Sans Pro", Helvetica, Arial, sans-serif;
   min-width:700px;
@@ -12,6 +14,12 @@ body {
   margin:auto;
 }
 
+#rendered {
+	height:100%;
+	margin-top:-55px;
+	padding-top:55px;
+	min-height:750px;
+}
 a {
   color: white;
   text-shadow:none;
@@ -111,23 +119,14 @@ a {
 
 .row-fluid [class*="span"] {
 	min-height:200px;
-
 }
 
-canvas {
+.row-fluid {
 }
+
+
 
 /*------------------------------------------- home page ---------------------------------------------------------*/
-#homeContainer {
-	width:1170px;
-	margin:auto;
-}
-
-#homepage {
-	height:800px;
-	background-color:#fff;
-}
-
 #clockMeshWrap img {
 	position:absolute;
 	float: none;
@@ -136,12 +135,17 @@ canvas {
 	height:440px;
 }
 
+#clockMeshWrap {
+	height:440px;
+	position:relative;
+}
+
 .clockMeshBackground {
 	width:100%;
 	height:440px;
-	height:440px;
+	float:left;
+	left:0;
 	background-color:#fcb040;	
-	
 	position:absolute;
 }
 
@@ -176,10 +180,10 @@ canvas {
 
 .benefitsWrap {
 	width:100%;
-	height:50px;
 	color:blue;
 	position:relative;
-	top:500px;
+	height:100%;
+	top:10%;
 }
 
 
@@ -199,6 +203,8 @@ canvas {
 	text-align:center;
 	font-weight:600;
 }
+
+
 
 /*------------------------------------------- team page ---------------------------------------------------------*/
 
