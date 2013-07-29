@@ -20,7 +20,9 @@ function drawGraphs(xLabels, ask, bid) {
 
 var myLine = new Chart(document.getElementById("myChart").getContext("2d")).Line(barChartData);
 }
-
+function saveMe() {
+  alert("hi");
+}
 // draw arrow for up/down 
 function drawGreenArrow(id) {
 	var canvas=document.getElementById(id);

@@ -154,9 +154,6 @@ canvas {
 	margin-left:30px;
 	margin-top:70px;
 }
-.leadingText:nth-child(2) {
-	display:none;
-}
 .leadTitle h2{
 	font-size:1.5em;
 	font-family:"Quantico";

@@ -8,7 +8,7 @@ block content
       div.row-fluid 
         div#clockMeshWrap
           img#clockMeshImg(src='/images/clockMesh.png')
-          div.leadingText
+          div.leadingText(ng-class="{ 'hidden': hideMe }")
             div.leadTitle 
              h2 Bitcoin Derivatives Trading.
             div.leadText 
@@ -16,26 +16,26 @@ block content
               br
               | price risk or simply play the market. 
             br
-            div.invite 
-              a.request Request invite
-          div.leadingText
-            div.leadTitle 
-             h2 Sign Up 
-            div.leadText 
-              | We'll email you as soon as we're ready. 
-              br
+            div.invite
+              a(ng-click="hideMe = ! hideMe; showMe = ! showMe;").request Request invite
+        div.leadingText(style=" display: none", ng-class="{ 'showMe' : showMe}") 
+          div.leadTitle 
+           h2 Sign Up 
+          div.leadText
+            | We'll email you as soon as we're ready. 
             br
-            form.form-horizontal.signUp(method="POST", action="/subscribe", ng-controller="showHideController")
-              label.control-label Name 
-              div.controls
-                input(type="text", placeholder="name", name="name")
+          br
+          form.form-horizontal.signUp(method="POST", action="/subscribe", ng-controller="showHideController")
+            label.control-label Name 
+            div.controls
+              input(type="text", placeholder="name", name="name")
+            br
+            label.control-label Email Address
+            div.controls
+              input(type="text", placeholder="your email", name="email")
+            div.controls
               br
-              label.control-label Email Address
-              div.controls
-                input(type="text", placeholder="your email", name="email")
-              div.controls
-                br
-                button#demo.invite Submit {{butter}}
+              button#demo.invite Submit
 
             
       br
