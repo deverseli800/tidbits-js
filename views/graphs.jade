@@ -49,9 +49,14 @@ block content
                 td {{order.expiry | date: 'MM:HH:mm:ss'}}
       div.row-fluid
         div.span6.tile
+          div.tileHead 
+            div.type
+              i.icon-signal
+            |Bid/Ask Real Time 
+            div.options
+              div.option
+                i.icon-cog
           table.table.table-striped
-            caption 
-              p Time and Sales
             thead 
               tr
                 th Time
@@ -69,7 +74,7 @@ block content
         div.span3.tile
           div.tileHead 
             div.type
-             i.icon-camera-retro
+             i.icon-info-sign
             | Mt. Gox Spot- Ask
             div.options
               div.option

@@ -142,7 +142,7 @@ function GraphDataController($scope, $http) {
 
   
   $scope.mtgox.update();
-  setInterval(function() {$scope.mtgox.update();}, 5000);
+  setInterval(function() {$scope.mtgox.update();}, 1000);
   
 }
 
