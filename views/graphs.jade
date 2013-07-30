@@ -1,12 +1,22 @@
 extends layout
 
+block head 
+  link(rel='stylesheet', href='/stylesheets/dashboard.css')
+
 block content
   div.container-fluid(ng-controller="GraphDataController")
+    div.row-fluid#graphNav
+      div.span4
+        | Place Order
+      div.span4
+        | Dashboard
+      div.span4
+        | My Portfolio
     div.row-fluid
       div.span12.tile
         div.tileHead 
           div.type
-            i.icon-signal
+            i.icon-bar-chart
           |Bid/Ask Real Time 
           div.options
             div.option
@@ -16,9 +26,14 @@ block content
       script(type='text/javascript', src='/javascripts/showHideController.js')
       div.row-fluid      
         div.span6.tile
+          div.tileHead 
+            div.type
+              i.icon-table
+            |Buying
+            div.options
+              div.option
+                i.icon-cog
           table.table.table-striped
-            caption
-              p Buying
             thead
               tr.buying
                 th Bid
@@ -32,9 +47,14 @@ block content
                 td {{order.quantity}}
                 td {{order.expiry | date: 'MM:HH:mm:ss'}}
         div.span6.tile
+          div.tileHead 
+            div.type
+              i.icon-table
+            |Selling
+            div.options
+              div.option
+                i.icon-cog
           table.table.table-striped
-            caption
-              p Selling
             thead
               tr
                 th Ask
@@ -51,7 +71,7 @@ block content
         div.span6.tile
           div.tileHead 
             div.type
-              i.icon-signal
+              i.icon-table
             |Bid/Ask Real Time 
             div.options
               div.option

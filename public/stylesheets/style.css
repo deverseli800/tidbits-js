@@ -2,7 +2,7 @@ body {
 	height:100%;
 	background-repeat:repeat;
 	font-size:16px;
-	color:#444;
+	color:rgb(108, 117, 121);
 }
 html {
 	min-height:100%;
@@ -114,6 +114,7 @@ a {
 
 .tile {
 	border:1px #ccc solid;
+
 	
 }
 
@@ -235,7 +236,7 @@ form {
 /*------------------------------------------- dashboard page ---------------------------------------------------------*/
 
 
-.tileHead, caption {
+.tileHead	{
 	height:20%;
 	text-align:center;
 	font-weight:600;
@@ -249,6 +250,9 @@ caption {
 	margin-top:5px;
 }
 
+.table th {
+	font-weight:400;
+}
 
 
 .tileData {
@@ -267,29 +271,34 @@ caption {
 }
 
 .tile {
-	margin-top:5px;
-	margin-bottom: 5px;
-	border-radius:5px;
+	
+}
+
+.tile [class*="span"] {
+	margin-left:1px;
 }
 
 .options  {
 	float:right;
-	overflow:hidden;
-	padding-left:3px;
-	padding-right:3px;
-
-	
 }
 
 .option{
-	border-left:1px #ccc solid;
-	display: inline;	
+	height:100%;
+	display: inline;
+	padding-left:3px;
+	padding-right:3px;	
 }
 
+.option i {
+	padding-top:2px;
+}
+
+.type i {
+	padding-top:2px;
+}
 .type {
 	float:left;
 	margin-left:5px;
-
 }
 	
 [class^="icon-"] {
@@ -302,4 +311,17 @@ caption {
 
 .red {
 	color:red;	
+}
+
+.tileHead {
+	padding-top:3px;
+	padding-bottom:2px;
+
+	font-weight:600;
+	color:rgb(52, 59, 65);
+	background-color:#f9f9f9;
+	background-color:white;
+	border-bottom:none;
+	border-bottom:1px #ccc solid;
+	font-weight:400;
 }
