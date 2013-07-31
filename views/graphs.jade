@@ -2,118 +2,151 @@ extends layout
 
 block head 
   link(rel='stylesheet', href='/stylesheets/dashboard.css')
+  script(type="text/javascript")
+    function SampleController($scope, $http) {
+      $scope.order = {
+        price : 0,
+        quantity : 0,
+        side : "Buy",
+        expiry : new Date(2013, 8, 15, 0, 0, 0, 0)
+      };
+
+      $scope.user = {};
+      $scope.setUser = function(user) {
+        $scope.user = user;
+        $scope.order.user = user._id;
+      };
+
+      $scope.submit = function() {
+        $http.post('/order', $scope.order).success(function(data) {
+          alert(JSON.stringify(data));
+        });
+      };
+    }
+
 
 block content
-  div.container-fluid(ng-controller="GraphDataController")
+  div.container-fluid(ng-controller="GraphDataController")   
     div.row-fluid#graphNav
-      div.span4
-        | Place Order
-      div.span4
-        | Dashboard
-      div.span4
-        | My Portfolio
-    div.row-fluid
-      div.span12.tile
-        div.tileHead 
-          div.type
-            i.icon-bar-chart
-          |Bid/Ask Real Time 
-          div.options
-            div.option
-              i.icon-cog       
-        canvas#myChart(width=1170, height=350, id="myChart")
-    div.row-fluid
-      script(type='text/javascript', src='/javascripts/showHideController.js')
-      div.row-fluid      
-        div.span6.tile
-          div.tileHead 
-            div.type
-              i.icon-table
-            |Buying
-            div.options
-              div.option
-                i.icon-cog
-          table.table.table-striped
-            thead
-              tr.buying
-                th Bid
-                th Size
-                th Sum
-                th Expiry
-            tbody
-              tr(ng-repeat="order in orders.orders", ng-show="order.side =='Buy'")
-                td {{order.created | date:'HH:mm:ss'}}
-                td {{order.price}}
-                td {{order.quantity}}
-                td {{order.expiry | date: 'MM:HH:mm:ss'}}
-        div.span6.tile
-          div.tileHead 
-            div.type
-              i.icon-table
-            |Selling
-            div.options
-              div.option
-                i.icon-cog
-          table.table.table-striped
-            thead
-              tr
-                th Ask
-                th Size
-                th Sum
-                th Expiry
-            tbody.selling
-              tr(ng-repeat="order in orders.orders", ng-show="order.side=='Sell'")
-                td {{order.created | date:'HH:mm:ss'}}
-                td {{order.price}}
-                td {{order.quantity}}
-                td {{order.expiry | date: 'MM:HH:mm:ss'}}
-      div.row-fluid
-        div.span6.tile
-          div.tileHead 
-            div.type
-              i.icon-table
-            |Bid/Ask Real Time 
-            div.options
-              div.option
-                i.icon-cog
-          table.table.table-striped
-            thead 
-              tr
-                th Time
-                th Price
-                th Volume
-                th Expiry
-                th Side
-            tbody 
-              tr(ng-repeat="order in orders.orders")
-                td {{order.created | date:'HH:MM:ss'}}
-                td {{order.price}}
-                td {{order.quantity}}
-                td {{order.expiry | date:'HH:MM:ss'}}
-                td {{order.side}}
-        div.span3.tile
-          div.tileHead 
-            div.type
-             i.icon-info-sign
-            | Mt. Gox Spot- Ask
-            div.options
-              div.option
-                i.icon-cog
-          div.tileData(ng-class="askColor") 
-            canvas(width=40, height=40, id="arrow");
-            | {{mtgox.lastBBO.ask | currency}}
-        div.span3.tile
-          div.tileHead 
-            div.type
-              i.icon-info-sign
-            | Mt. Gox Spot- Bid
-            div.options
-              div.option
-                i.icon-cog
-          div.tileData(ng-class="bidColor") 
-            canvas(width=40, height=40, id="arrow2");
-            | {{mtgox.lastBBO.bid | currency }}
-        div.span3.tile
-          div.titleHead UpDown
-          div.tileData {{askUpDown}}, {{bidUpDown}}
-        
+          div.span4
+            | Place Order
+          div.span4
+            | Dashboard
+          div.span4
+            | My Portfolio
+        div.row-fluid
+          div.span12.tile
+            div.tileHead 
+              div.type
+                i.icon-bar-chart
+              |Bid/Ask Real Time 
+              div.options
+                div.option
+                  i.icon-cog       
+            canvas#myChart(width=1170, height=350, id="myChart")
+        div.row-fluid
+          script(type='text/javascript', src='/javascripts/showHideController.js')
+          div.row-fluid  
+            div.span6.tile
+              div.tileHead 
+                div.type
+                  i.icon-table
+                |Bid/Ask Real Time 
+                div.options
+                  div.option
+                    i.icon-cog
+              table.table.table-striped
+                thead 
+                  tr
+                    th Time
+                    th Price
+                    th Volume
+                    th Expiry
+                    th Side
+                tbody 
+                  tr(ng-repeat="order in orders.orders")
+                    td {{order.created | date:'HH:MM:ss'}}
+                    td {{order.price}}
+                    td {{order.quantity}}
+                    td {{order.expiry | date:'HH:MM:ss'}}
+                    td {{order.side}}  
+            div.span6.tile
+              div.tileHead 
+                div.type
+                  i.icon-bar-chart
+                |Orderbook
+                div.options
+                  div.option
+                    i.icon-cog       
+              canvas#barChart(width=535, height=350, id="barChart")  
+            div.span6.tile
+              div.tileHead 
+                div.type
+                  i.icon-table
+                |Buying
+                div.options
+                  div.option
+                    i.icon-cog
+              table.table.table-striped
+                thead
+                  tr.buying
+                    th Bid
+                    th Price
+                    th Sum
+                    th Expiry
+                tbody
+                  tr(ng-repeat="order in orders.orders", ng-show="order.side =='Buy'")
+                    td {{order.created | date:'HH:mm:ss'}}
+                    td {{order.price}}
+                    td {{order.quantity}}
+                    td {{order.expiry | date: 'MM:HH:mm:ss'}}
+          div.row-fluid
+            div.span6.tile
+              div.tileHead 
+                div.type
+                  i.icon-table
+                |Selling
+                div.options
+                  div.option
+                    i.icon-cog
+              table.table.table-striped
+                thead
+                  tr
+                    th Ask
+                    th Price
+                    th Sum
+                    th Expiry
+                tbody.selling
+                  tr(ng-repeat="order in orders.orders", ng-show="order.side=='Sell'")
+                    td {{order.created | date:'HH:mm:ss'}}
+                    td {{order.price}}
+                    td {{order.quantity}}
+                    td {{order.expiry | date: 'MM:HH:mm:ss'}}
+            div.span3.tile
+              div.tileHead 
+                div.type
+                 i.icon-info-sign
+                | Mt. Gox Spot- Ask
+                div.options
+                  div.option
+                    i.icon-cog
+              div.tileData(ng-class="askColor") 
+                canvas(width=40, height=40, id="arrow");
+                | {{mtgox.lastBBO.ask | currency}}
+            div.span3.tile
+              div.tileHead 
+                div.type
+                  i.icon-info-sign
+                | Mt. Gox Spot- Bid
+                div.options
+                  div.option
+                    i.icon-cog
+              div.tileData(ng-class="bidColor") 
+                canvas(width=40, height=40, id="arrow2");
+                | {{mtgox.lastBBO.bid | currency }}
+            div.span3.tile
+              div.titleHead UpDown
+              div.tileData {{askUpDown}}, {{bidUpDown}}
+            
+
+            

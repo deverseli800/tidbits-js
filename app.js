@@ -92,12 +92,12 @@ var Order = db.model('orders', OrderSchema);
 var TradeSchema = require('./models/Trade.js').TradeSchema;
 var Trade = db.model('trades', TradeSchema);
 
-app.get('/place/:username', function(req, res) {
+app.get('/graphs/:username', function(req, res) {
   User.findOne({ username : req.params.username }, function(error, user) {
     if (error || !user) {
       res.json({ error : 'User ' + req.params.username + ' not found' });
     } else {
-      res.render('place', { user : user });
+      res.render('graphs', { user : user });
     }
   });
 });

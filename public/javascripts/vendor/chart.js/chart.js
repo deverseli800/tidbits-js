@@ -341,7 +341,7 @@ window.Chart = function(context){
             barStrokeWidth : 2,
             barValueSpacing : 5,
             barDatasetSpacing : 1,
-            animation : true,
+            animation : false,
             animationSteps : 60,
             animationEasing : "easeOutQuart",
             onAnimationComplete : null

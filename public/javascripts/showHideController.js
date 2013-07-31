@@ -1,6 +1,6 @@
-//graphy stuff
-function drawGraphs(xLabels, ask, bid) {
-  var barChartData = {
+//graphy stuff for line graph
+function drawLineGraph(xLabels, ask, bid) {
+  var lineChartData = {
     labels : xLabels,
     datasets : [
       {
@@ -18,11 +18,25 @@ function drawGraphs(xLabels, ask, bid) {
     
   }
 
-var myLine = new Chart(document.getElementById("myChart").getContext("2d")).Line(barChartData);
+  var myLine = new Chart(document.getElementById("myChart").getContext("2d")).Line(lineChartData);
 }
-function saveMe() {
-  alert("hi");
+
+//draw bar graph
+function drawBarGraph(labels, quantity) {
+  var barChartData = {
+    labels : labels,
+    datasets : [
+      {
+        fillColor : "rgba(106,174,242,0.5)",
+        strokeColor : "rgba(220,220,220,1)",
+        data : quantity
+      }
+      
+    ]
+  }
+  var myLine = new Chart(document.getElementById("barChart").getContext("2d")).Bar(barChartData);
 }
+
 // draw arrow for up/down 
 function drawGreenArrow(id) {
 	var canvas=document.getElementById(id);
@@ -71,7 +85,14 @@ function GraphDataController($scope, $http) {
       });
     }
   };
+  
   $scope.orders.update();
+  $scope.orderPrices=[];
+  for(var i=0; i<$scope.orders.orders.length; i++) {
+    //$scope.orderPrices.push($scope.orders.orders[i].price);
+    alert($scope.orders.orders[i]);
+  
+}
 
   // Executed trades
   $scope.trades = {
@@ -96,8 +117,7 @@ function GraphDataController($scope, $http) {
 
   //this generates an array with our x labels 
   for (var i=0;i<31;i++) {
-    $scope.xLabel.push(i);
-    
+     $scope.xLabel.push(i);  
   }
 
   // Mt Gox Prices
@@ -107,11 +127,25 @@ function GraphDataController($scope, $http) {
     update : function() {
       $http.get('/mtgox.json').success(function(data) {
         if (data.lastBBO) {
+
+          //create array of all order prices
+          $scope.orderPrices=[];
+          $scope.orderQTY=[];
+          for(var i=0; i<$scope.orders.orders.length; i++) {
+            $scope.orderPrices.push($scope.orders.orders[i].price);
+            $scope.orderQTY.push($scope.orders.orders[i].quantity);
+            }
+
+          drawBarGraph($scope.orderPrices.sort(), $scope.orderQTY);
+
+          //get mtgox data 
           $scope.mtgox.lastBBO = data.lastBBO;
           $scope.pricesAsk.push($scope.mtgox.lastBBO.ask);
           $scope.pricesBid.push($scope.mtgox.lastBBO.bid);
+
           //label the x axis of the chart 
-          drawGraphs($scope.xLabel, $scope.pricesAsk.slice(Math.max($scope.pricesAsk.length - 30, 0)), $scope.pricesBid.slice(Math.max($scope.pricesBid.length - 30, 0)));
+          drawLineGraph($scope.xLabel, $scope.pricesAsk.slice(Math.max($scope.pricesAsk.length - 30, 0)), $scope.pricesBid.slice(Math.max($scope.pricesBid.length - 30, 0)));
+          
           //draw arrows based on uptick or downtick for ask 
           $scope.askUpDown= $scope.pricesAsk[$scope.pricesAsk.length-2]-$scope.pricesAsk[$scope.pricesAsk.length-1];
           if ($scope.askUpDown>0) {
@@ -122,6 +156,7 @@ function GraphDataController($scope, $http) {
           	drawGreenArrow("arrow");
             $scope.askColor="green";
           }
+          
           //draw arrows based on uptick or downtick for bid 
           $scope.bidUpDown= $scope.pricesBid[$scope.pricesBid.length-2]-$scope.pricesBid[$scope.pricesBid.length-1];
           if ($scope.bidUpDown>0) {
@@ -143,7 +178,7 @@ function GraphDataController($scope, $http) {
   
   $scope.mtgox.update();
   setInterval(function() {$scope.mtgox.update();}, 1000);
-  
+
 }
 
 
