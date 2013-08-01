@@ -7,10 +7,9 @@ body {
 html {
 	min-height:100%;
 }
-.container, .container-fluid {
+.container {
   font-family:"Source Sans Pro", Helvetica, Arial, sans-serif;
-  min-width:700px;
-  width:1170px;
+  max-width:1170px;
   margin:auto;
 }
 
@@ -38,7 +37,8 @@ a {
 
 #logo {
 	position:absolute;
-	top:2px;
+	top:4px;
+	margin-right:20px;
 
 }
 
@@ -66,37 +66,38 @@ a {
 }
 
 
-.navbar-inner {
-	background-image:none;
-	background-color:#242424;
-	border:none;
-}
+
 .navbar {
 	background-color:#242424;
-	height:55px;
-	padding-top:10px;
+	padding-top:7px;
+	height:64px;
 	margin-bottom:0px;
+	padding-bottom:5px;
 }
 
 .nav ul {
 	color:blue;
 	border:1px blue solid;
 }
-.navbar .brand {
+.navbar-brand {
 	font-family:"Quantico";
 	font-weight:400;
 	color:white;
 	text-shadow:none;
 	font-size:30px;
+	width:155px;
+	text-align: right;
+	font-size:30px;
+	padding-left:80px;
+}
+
+#logo {
+	position:absolute;
+	left:90px;
 }
 
 .brand {
-	width:155px;
-	padding-left:100px;
-	text-align: right;
-	font-size:30px;
 }
-
 
 
 #row1 {
@@ -113,17 +114,15 @@ a {
 
 
 .tile {
-	border:1px #ccc solid;
-
-	
+	border:1px #ccc solid;	
 }
 
-.row-fluid [class*="span"] {
+.row [class*="col-lg-"] {
 	min-height:200px;
+	background-color:white;
 }
 
-.row-fluid {
-}
+
 
 
 

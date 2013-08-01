@@ -8,7 +8,6 @@ html(ng-app)
     script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.js')
     script(src="/javascripts/vendor/chart.js/chart.js")
     link(rel='stylesheet', href='/stylesheets/bootstrap.css')
-    link(href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css", rel="stylesheet")
     link(href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css", rel="stylesheet")
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Quantico:400,400italic,700,700italic')
@@ -18,19 +17,19 @@ html(ng-app)
 
   body
      div.navbar
-      div.container-fluid
-        img#logo(src="/images/bLogo.png")
-        div.navbar-inner
-          a.brand Miezaru
-          div.pull-right
-            ul.nav
-              li 
-                a(href="/") Home
-              li 
-                a(href="/graphs") Dashboard
-              li 
-                a(href="/team") Team
-    div.container-fluid#rendered
+      div.container
+        img#logo(src="/images/blogo.png")
+        a.navbar-brand 
+          | Miezaru
+        div.pull-right
+          ul.nav.navbar-nav
+            li 
+              a(href="/") Home
+            li 
+              a(href="/graphs") Dashboard
+            li 
+              a(href="/team") Team
+    div.container#rendered
     block content
 
     
