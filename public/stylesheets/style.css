@@ -1,7 +1,6 @@
 body {
 	height:100%;
 	background-repeat:repeat;
-	font-size:16px;
 	color:rgb(108, 117, 121);
 }
 html {
@@ -19,6 +18,11 @@ html {
 	padding-top:55px;
 	min-height:750px;
 }
+
+.navbar-nav {
+	font-size:1.1em;
+}
+
 a {
   color: white;
   text-shadow:none;
@@ -42,14 +46,6 @@ a {
 
 }
 
-#logo img {
-	
-}
-
-.pull-left {
-	border:1px red solid;
-}
-
 .boxTitle {
 	background-color:#323232;
 	color:white;
@@ -60,11 +56,9 @@ a {
 	
 }
 
-
 .viewHeader {
 	font-weight:400;
 }
-
 
 
 .navbar {
@@ -73,6 +67,7 @@ a {
 	height:64px;
 	margin-bottom:0px;
 	padding-bottom:5px;
+	border-radius:0;
 }
 
 .nav ul {
@@ -84,34 +79,15 @@ a {
 	font-weight:400;
 	color:white;
 	text-shadow:none;
-	font-size:30px;
-	width:155px;
-	text-align: right;
-	font-size:30px;
-	padding-left:80px;
+	font-size:1.8em;
+	text-align: left;
+	padding:0;
 }
 
-#logo {
-	position:absolute;
-	left:90px;
+.navbar-brand img {
+	margin-right:10px;
+	margin-top:-2px;
 }
-
-.brand {
-}
-
-
-#row1 {
-	color:white;
-}
-
-.boxBody {
-	background-image:url('/images/noisy_grid_dark2.png'); 
-	background-repeat:repeat;
-}
-
-
-
-
 
 .tile {
 	border:1px #ccc solid;	
@@ -121,10 +97,6 @@ a {
 	min-height:200px;
 	background-color:white;
 }
-
-
-
-
 
 /*------------------------------------------- home page ---------------------------------------------------------*/
 #clockMeshWrap img {
@@ -156,22 +128,29 @@ a {
 	font-weight:400;
 	font-size:1.2em;
 	margin-left:30px;
-	margin-top:70px;
+	margin-top:40px;
 }
 .leadTitle h2{
-	font-size:1.5em;
 	font-family:"Quantico";
 	font-weight:normal;
+	margin-bottom:0px;
+}
+
+.leadText h4{
+	line-height:24px;
+	font-weight:400;
 }
 
 .invite {
 	padding:5px;
 	background-color:#ff6600;
-	width:100px;
 	text-align:center;
 	font-size:0.8em;
 	position:relative;
 	margin:auto;	
+	width:170px;
+	text-transform:uppercase;
+	top:9px;
 }
 
 .invite a {
@@ -187,7 +166,6 @@ a {
 }
 
 
-
 .benefits img{
 	margin:auto;
 	display:block;
@@ -201,10 +179,8 @@ a {
 
 .benefits h4 {
 	text-align:center;
-	font-weight:600;
+	font-weight:500;
 }
-
-
 
 /*------------------------------------------- team page ---------------------------------------------------------*/
 
@@ -227,10 +203,7 @@ a {
 	margin-bottom:5px;
 }
 
-
-
 /*------------------------------------------- dashboard page ---------------------------------------------------------*/
-
 
 .tileHead	{
 	height:20%;
@@ -276,6 +249,11 @@ caption {
 
 .options  {
 	float:right;
+}
+
+.option .btn {
+	height:14px;
+	padding-top:0px;
 }
 
 .option{

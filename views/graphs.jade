@@ -28,15 +28,6 @@ block head
 
 block content
   div.container(ng-controller="GraphDataController")   
-    div.row#graphNav
-      div.col-lg-12
-        div.row
-          div.col-lg-4
-            | Place Order
-          div.col-lg-4
-            | Dashboard
-          div.col-lg-4
-            | My Portfolio
     div.row#placeForm
       div.col-lg-12.tile
         div.tileHead 
@@ -44,7 +35,7 @@ block content
           div.options
             div.option
               div.btn
-                i.icon-caret-down    
+                i.icon-check-minus.icon-large    
         form.form-inline(ng-controller="SampleController", ng-init="setUser( #{JSON.stringify(user)} )")
           label Price
           input(type="number", ng-model="order.price")
@@ -144,6 +135,7 @@ block content
                   td {{order.created | date:'HH:mm:ss'}}
                   td {{order.price}}
                   td {{order.quantity}}
+                  td {{order.expiry | date: 'MM:HH:mm:ss'}}
     div.row
       div.col-lg-12
         div.row

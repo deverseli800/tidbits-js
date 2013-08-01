@@ -6,14 +6,14 @@ block content
       img#clockMeshImg(src='/images/clockMesh.png')
       div.leadingText(ng-class="{ 'hidden': hideMe }")
         div.leadTitle 
-         h2 Bitcoin Derivatives Trading.
+         h2 Bitcoin Derivatives Trading
         div.leadText 
-          | Trade forwards and futures for bitcoin. Hedge 
-          br
-          | price risk or simply play the market. 
-        br
+          h4 Trade forwards and futures for bitcoin. Hedge 
+            br 
+            | price risk or simply play the market. 
         div.invite
-          a(ng-click="hideMe = ! hideMe; showMe = ! showMe;").request Request invite
+          a(ng-click="hideMe = ! hideMe; showMe = ! showMe;").request 
+            h5 Request invite
       div.leadingText(style=" display: none", ng-class="{ 'showMe' : showMe}") 
         div.leadTitle 
          h2 Sign Up 
