@@ -95,14 +95,13 @@ function heatMap(dataArray) {
         }
         else {
           level3.push(array[i]);
-          value[i].style.backgroundColor="green";
         }
       }
       //iterate over all values of quantityCell
       for(i=0;i<value.length;i++){
         for(x=0;x<level1.length;x++) {
           if(value[i].innerHTML==level1[x]) {
-            value[i].style.backgroundColor="green";
+            
           }
           else{
 
@@ -110,14 +109,16 @@ function heatMap(dataArray) {
         }
         for(x=0;x<level2.length;x++) {
           if(value[i].innerHTML==level2[x]) {
-            value[i].style.backgroundColor="blue";
+            
           }
           else{
           }
         }
         for(x=0;x<level3.length;x++) {
           if(value[i].innerHTML==level3[x]) {
-            value[i].style.backgroundColor="red";
+            var opacity=1/level3.length;
+            //alert(.2+(opacity*x));
+            value[i].style.backgroundColor="rgba(239,19,19,"+(.2+(opacity*x))+")";
           }
           else{
           }
@@ -175,32 +176,29 @@ function GraphDataController($scope, $http) {
 
   // Mt Gox Prices
   $scope.mtgox = {
-    
+    order: function() {
+      //create array of all order prices
+      $scope.orderPrices=[];
+      $scope.orderQTY=[];
+      for(var i=0; i<$scope.orders.orders.length; i++) {
+        $scope.orderPrices.push($scope.orders.orders[i].price);
+        $scope.orderQTY.push($scope.orders.orders[i].quantity);
+        }
+      //draw bar graph
+      drawBarGraph($scope.orderPrices.sort(compareNumbers), $scope.orderQTY);
+
+      //draw heat map
+      heatMap($scope.orderQTY);         
+          
+    },
     lastBBO : {},
     update : function() {
       $http.get('/mtgox.json').success(function(data) {
         if (data.lastBBO) {
-
-          //create array of all order prices
-          $scope.orderPrices=[];
-          $scope.orderQTY=[];
-          for(var i=0; i<$scope.orders.orders.length; i++) {
-            $scope.orderPrices.push($scope.orders.orders[i].price);
-            $scope.orderQTY.push($scope.orders.orders[i].quantity);
-            }
-          
-          drawBarGraph($scope.orderPrices.sort(compareNumbers), $scope.orderQTY);
-
-          heatMap($scope.orderQTY);
-          
-
-          
-
           //get mtgox data 
           $scope.mtgox.lastBBO = data.lastBBO;
           $scope.pricesAsk.push($scope.mtgox.lastBBO.ask);
           $scope.pricesBid.push($scope.mtgox.lastBBO.bid);
-
           //label the x axis of the chart 
           drawLineGraph($scope.xLabel, $scope.pricesAsk.slice(Math.max($scope.pricesAsk.length - 30, 0)), $scope.pricesBid.slice(Math.max($scope.pricesBid.length - 30, 0)));
           
@@ -236,6 +234,8 @@ function GraphDataController($scope, $http) {
   
   $scope.mtgox.update();
   setInterval(function() {$scope.mtgox.update();}, 1000);
+  $scope.mtgox.order();
+  setInterval(function(){$scope.mtgox.order();},1000);
 
 }
 
