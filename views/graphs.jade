@@ -24,8 +24,7 @@ block head
         });
       };
     }
-
-
+  
 block content
   div.container(ng-controller="GraphDataController")   
     div.row#placeForm
@@ -67,7 +66,7 @@ block content
               div.options
                 div.option
                   i.icon-cog
-            table.table.table-striped
+            table.table.table-striped#heatmap
               thead 
                 tr
                   th Time
@@ -76,10 +75,10 @@ block content
                   th Expiry
                   th Side
               tbody 
-                tr(ng-repeat="order in orders.orders")
+                tr(ng-repeat="order in orders.orders", ng-init="init()")
                   td {{order.created | date:'HH:MM:ss'}}
                   td {{order.price}}
-                  td {{order.quantity}}
+                  td.quantityCell {{order.quantity}}
                   td {{order.expiry | date:'HH:MM:ss'}}
                   td {{order.side}}   
           div.col-lg-6.tile
@@ -164,6 +163,5 @@ block content
           div.col-lg-3.tile
             div.titleHead UpDown
             div.tileData {{askUpDown}}, {{bidUpDown}}
-          
-
+        
             

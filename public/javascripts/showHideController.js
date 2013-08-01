@@ -21,6 +21,11 @@ function drawLineGraph(xLabels, ask, bid) {
   var myLine = new Chart(document.getElementById("myChart").getContext("2d")).Line(lineChartData);
 }
 
+//sort ascending 
+function compareNumbers(a, b) {
+       return a-b;
+      }
+
 //draw bar graph
 function drawBarGraph(labels, quantity) {
   var barChartData = {
@@ -71,6 +76,56 @@ function drawRedArrow(id) {
       context.lineWidth = 1;
 }
 
+function heatMap(dataArray) {
+      var array=dataArray.sort(compareNumbers);
+      var traunchSize= Math.round(array.length*.33);
+      var level1=[];
+      var level2=[];
+      var level3=[];
+      var value= document.getElementsByClassName('quantityCell');
+
+      for(i=0;i<array.length;i++) {
+        var value= document.getElementsByClassName('quantityCell');
+        if(i<(traunchSize)) {
+          level1.push(array[i]);
+          //value[i].style.backgroundColor="red";
+        }
+        else if(i<(traunchSize*2)) {
+          level2.push(array[i]);
+        }
+        else {
+          level3.push(array[i]);
+          value[i].style.backgroundColor="green";
+        }
+      }
+      //iterate over all values of quantityCell
+      for(i=0;i<value.length;i++){
+        for(x=0;x<level1.length;x++) {
+          if(value[i].innerHTML==level1[x]) {
+            value[i].style.backgroundColor="green";
+          }
+          else{
+
+          }
+        }
+        for(x=0;x<level2.length;x++) {
+          if(value[i].innerHTML==level2[x]) {
+            value[i].style.backgroundColor="blue";
+          }
+          else{
+          }
+        }
+        for(x=0;x<level3.length;x++) {
+          if(value[i].innerHTML==level3[x]) {
+            value[i].style.backgroundColor="red";
+          }
+          else{
+          }
+        }
+
+      }
+    }
+
 function GraphDataController($scope, $http) {
   // Open orders
   $scope.orders = {
@@ -85,7 +140,7 @@ function GraphDataController($scope, $http) {
       });
     }
   };
-  
+
   $scope.orders.update();
   $scope.orderPrices=[];
   for(var i=0; i<$scope.orders.orders.length; i++) {
@@ -113,8 +168,6 @@ function GraphDataController($scope, $http) {
   $scope.pricesBid=[110,100];
   $scope.xLabel=[];
 
-
-
   //this generates an array with our x labels 
   for (var i=0;i<31;i++) {
      $scope.xLabel.push(i);  
@@ -135,8 +188,13 @@ function GraphDataController($scope, $http) {
             $scope.orderPrices.push($scope.orders.orders[i].price);
             $scope.orderQTY.push($scope.orders.orders[i].quantity);
             }
+          
+          drawBarGraph($scope.orderPrices.sort(compareNumbers), $scope.orderQTY);
 
-          drawBarGraph($scope.orderPrices.sort(), $scope.orderQTY);
+          heatMap($scope.orderQTY);
+          
+
+          
 
           //get mtgox data 
           $scope.mtgox.lastBBO = data.lastBBO;
