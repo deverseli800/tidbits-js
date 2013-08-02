@@ -44,8 +44,8 @@ block content
                 | Ticks
             li 
               a(href="/team")
-                i.icon-user
-                | User
+                i.icon-wrench
+                | Tools
   div.container(ng-controller="GraphDataController")   
     div.row#placeForm
       div.col-lg-12.tile
@@ -79,7 +79,7 @@ block content
     div.row
       div.col-lg-12
         div.row
-          div.col-lg-6.tile
+          div.col-lg-6.tile(draggable="true")
             div.tileHead 
               div.type
                 i.icon-table
@@ -184,5 +184,5 @@ block content
           div.col-lg-3.tile
             div.titleHead UpDown
             div.tileData {{askUpDown}}, {{bidUpDown}}
-        
+  script(type='text/javascript', src='/javascripts/arrangeTiles.js')
             

@@ -13,3 +13,7 @@ exports.place = function(req, res){
 exports.team = function(req, res){
   res.render('team', { title: 'Team' });
 };
+
+exports.dragDrop = function(req, res){
+  res.render('dragDrop', { title: 'Team' });
+};

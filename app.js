@@ -106,6 +106,11 @@ app.get('/', function(req, res) {
   res.render('index', { title : 'Home' });
 });
 
+//get this deleted after i'm done with drag/drop tutorial
+app.get('/dragDrop', function(req, res) {
+  res.render('dragDrop', { title : 'Learn' });
+});
+
 app.get('/place', function(req, res) {
   res.render('place', {title: 'Title'});
 });
