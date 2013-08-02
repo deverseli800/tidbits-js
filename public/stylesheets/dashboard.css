@@ -3,6 +3,15 @@ body {
 	background-color: rgb(234, 234, 234);	
 }
 
+#account {
+  height:40px;
+  min-height:30px;
+}
+
+#account .container, .pull-right, ul, li {
+  height:40px;
+  margin-top:-2px;
+}
 
 #graphNav div {
 	text-align:center;

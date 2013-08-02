@@ -2,7 +2,7 @@ doctype 5
 html(ng-app)
   head
     title Tidbits Test
-    script(type='text/javscript', src='http://code.jquery.com/jquery-latest.min.js')
+    script(type='text/javscript', src='https://ajax.googleapis.com/ajax/libs/jquery/latest/jquery.min.js')
     script(type='text/javscript', src='/javascripts/bootstrap.js')
     script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.js')
     script(src="/javascripts/vendor/chart.js/chart.js")
@@ -15,20 +15,20 @@ html(ng-app)
     block head
 
   body
-     div.navbar
+     div.navbar#mainNavbar
       div.container
-        a.navbar-brand 
-          img(src="/images/Blogo.png")
-          | Miezaru
-        div.pull-right
-          ul.nav.navbar-nav
-            li 
-              a(href="/") Home
-            li 
-              a(href="/graphs") Dashboard
-            li 
-              a(href="/team") Team
-    div.container#rendered
+          a.navbar-brand 
+            img(src="/images/bLogo.png")
+            | Miezaru
+          div.pull-right
+            ul.nav.navbar-nav
+              li 
+                a(href="/") Home
+              li 
+                a(href="/place") Dashboard
+              li 
+                a(href="/team") Team
+    div.container-fluid#rendered
     block content
 
     

@@ -26,17 +26,28 @@ block head
     }
   
 block content
+  div.navbar#account
+      div.container
+        div.pull-right
+          ul.nav.navbar-nav
+           li 
+              a(href="/") Graphs
+            li 
+              a(href="/") Tables
+            li 
+              a(href="/graphs") Information
+            li 
+              a(href="/team") User 
   div.container(ng-controller="GraphDataController")   
     div.row#placeForm
       div.col-lg-12.tile
         div.tileHead 
           div.type
             i.icon-bar-chart
-          |Place Order 
+          | Place Order
           div.options
             div.option
-              div.btn
-                i.icon-check-minus.icon-large(ng-click="orderFormHide = ! orderFormHide")    
+              i.icon-remove(ng-click="orderFormHide = ! orderFormHide")    
         form.form-inline(ng-controller="SampleController", ng-init="setUser( #{JSON.stringify(user)} )", ng-class="{ 'hidden': orderFormHide }")
           label Price
           input(type="number", ng-model="order.price")
