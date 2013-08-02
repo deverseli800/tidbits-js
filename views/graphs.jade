@@ -31,13 +31,21 @@ block content
         div.pull-right
           ul.nav.navbar-nav
            li 
-              a(href="/") Graphs
+              a(href="/") 
+                i.icon-bar-chart
+                | Graphs
             li 
-              a(href="/") Tables
+              a(href="/") 
+                i.icon-table
+                | Tables
             li 
-              a(href="/graphs") Information
+              a(href="/graphs") 
+                i.icon-info-sign
+                | Ticks
             li 
-              a(href="/team") User 
+              a(href="/team")
+                i.icon-user
+                | User
   div.container(ng-controller="GraphDataController")   
     div.row#placeForm
       div.col-lg-12.tile
@@ -56,7 +64,7 @@ block content
           label  Side
           select(ng-model="order.side", ng-options="x for x in ['Buy', 'Sell']")
           | Expiry
-          | {{order.expiry}}
+          | {{order.expiry}} {{user.username}}
           div.btn.btn-warning(ng-click="submit()", style="cursor: pointer; background-color: orange; width: 100px") Submit
     div.row
       div.col-lg-12.tile
