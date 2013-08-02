@@ -1,0 +1,19 @@
+extends layout
+
+block head 
+  link(rel='stylesheet', href='/stylesheets/dashboard.css')
+  
+block content 
+  div.container
+    div.row
+      div.col-lg-12
+        div.row
+          div.col-lg-4.tile(draggable='true')
+            h2 A This is the First One
+          div.col-lg-4.tile(draggable='true')
+            h2 B the second
+          div.col-lg-4.tile(draggable='true')
+            h2 C el tercero 
+  script(type='text/javascript', src='/javascripts/arrangeTiles.js')
+  
+    
