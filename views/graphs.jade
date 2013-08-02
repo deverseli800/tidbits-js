@@ -30,12 +30,14 @@ block content
     div.row#placeForm
       div.col-lg-12.tile
         div.tileHead 
+          div.type
+            i.icon-bar-chart
           |Place Order 
           div.options
             div.option
               div.btn
-                i.icon-check-minus.icon-large    
-        form.form-inline(ng-controller="SampleController", ng-init="setUser( #{JSON.stringify(user)} )")
+                i.icon-check-minus.icon-large(ng-click="orderFormHide = ! orderFormHide")    
+        form.form-inline(ng-controller="SampleController", ng-init="setUser( #{JSON.stringify(user)} )", ng-class="{ 'hidden': orderFormHide }")
           label Price
           input(type="number", ng-model="order.price")
           label Quantity
