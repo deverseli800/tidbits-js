@@ -29,9 +29,9 @@ block content
   div.navbar#account
       div.container
         div.pull-right
-          ul.nav.navbar-nav
-           li 
-              a(href="/") 
+          ul.nav.nav-pills
+           li.active
+              a(href="#", ng-click="hideGraphMenu = ! hideGraphMenu")
                 i.icon-bar-chart
                 | Graphs
             li 
@@ -46,9 +46,25 @@ block content
               a(href="/team")
                 i.icon-wrench
                 | Tools
+  div.navbar#tilePicker(ng-class="{'hidden': hideGraphMenu}")
+      div.container
+        div.pull-right
+          ul.nav.navbar-nav
+           li
+              a(href="/") 
+                i.icon-bar-chart
+                | Spot Prices
+            li 
+              a(href="/") 
+                i.icon-bar-chart  
+                | Orderbook Candlestick
+            li 
+              a(href="/") 
+                i.icon-bar-chart
+                | Orderbook Historical Line
   div.container(ng-controller="GraphDataController")   
     div.row#placeForm
-      div.col-lg-12.tile
+      div.col-lg-12.tile(draggable="true", ng-class="{ 'hidden': orderFormHide }")
         div.tileHead 
           div.type
             i.icon-bar-chart
@@ -56,7 +72,7 @@ block content
           div.options
             div.option
               i.icon-remove(ng-click="orderFormHide = ! orderFormHide")    
-        form.form-inline(ng-controller="SampleController", ng-init="setUser( #{JSON.stringify(user)} )", ng-class="{ 'hidden': orderFormHide }")
+        form.form-inline(ng-controller="SampleController", ng-init="setUser( #{JSON.stringify(user)} )")
           label Price
           input(type="number", ng-model="order.price")
           label Quantity
@@ -67,7 +83,7 @@ block content
           | {{order.expiry}} {{user.username}}
           div.btn.btn-warning(ng-click="submit()", style="cursor: pointer; background-color: orange; width: 100px") Submit
     div.row
-      div.col-lg-12.tile
+      div.col-lg-12.tile(draggable="true")
         div.tileHead 
           div.type
             i.icon-bar-chart
@@ -102,19 +118,19 @@ block content
                   td.quantityCell {{order.quantity}}
                   td {{order.expiry | date:'HH:MM:ss'}}
                   td {{order.side}}   
-          div.col-lg-6.tile
+          div.col-lg-6.tile(draggable="true")
             div.tileHead 
               div.type
                 i.icon-bar-chart
               |Orderbook
               div.options
                 div.option
-                  i.icon-cog.icon-spin       
+                  i.icon-cog     
             canvas#barChart(width=535, height=350, id="barChart")  
     div.row
       div.col-lg-12 
         div.row
-          div.col-lg-6.tile
+          div.col-lg-6.tile(draggable="true")
             div.tileHead 
               div.type
                 i.icon-table
@@ -135,7 +151,7 @@ block content
                   td {{order.price}}
                   td {{order.quantity}}
                   td {{order.expiry | date: 'MM:HH:mm:ss'}}
-          div.col-lg-6.tile
+          div.col-lg-6.tile(draggable="true")
             div.tileHead 
               div.type
                 i.icon-table
@@ -159,7 +175,7 @@ block content
     div.row
       div.col-lg-12
         div.row
-          div.col-lg-3.tile
+          div.col-lg-3.tile(draggable="true")
             div.tileHead 
               div.type
                i.icon-info-sign
@@ -170,7 +186,7 @@ block content
             div.tileData(ng-class="askColor") 
               canvas(width=40, height=40, id="arrow");
               | {{mtgox.lastBBO.ask | currency}}
-          div.col-lg-3.tile
+          div.col-lg-3.tile(draggable="true")
             div.tileHead 
               div.type
                 i.icon-info-sign
@@ -181,7 +197,7 @@ block content
             div.tileData(ng-class="bidColor") 
               canvas(width=40, height=40, id="arrow2");
               | {{mtgox.lastBBO.bid | currency }}
-          div.col-lg-3.tile
+          div.col-lg-3.tile(draggable="true")
             div.titleHead UpDown
             div.tileData {{askUpDown}}, {{bidUpDown}}
   script(type='text/javascript', src='/javascripts/arrangeTiles.js')

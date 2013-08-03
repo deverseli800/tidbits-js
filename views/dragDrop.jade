@@ -5,15 +5,54 @@ block head
   
 block content 
   div.container
-    div.row
+  div.navbar#account
+      div.container
+        div.pull-right
+          ul.nav.nav-pills
+           li.active
+              a(href="#", ng-click="hideGraphMenu = ! hideGraphMenu")
+                i.icon-bar-chart
+                | Graphs
+            li 
+              a(href="/") 
+                i.icon-table
+                | Tables
+            li 
+              a(href="/graphs") 
+                i.icon-info-sign
+                | Ticks
+            li 
+              a(href="/team")
+                i.icon-wrench
+                | Tools
+  div.navbar#tilePicker(ng-class="{'hidden': hideGraphMenu}")
+      div.container
+        div.pull-right
+          ul.nav.navbar-nav
+           li
+              a.newTile(href="/", draggable="true")
+                i.icon-bar-chart
+                | Spot Prices
+            li 
+              a(href="/") 
+                i.icon-bar-chart  
+                | Orderbook Candlestick
+            li 
+              a(href="/") 
+                i.icon-bar-chart
+                | Orderbook Historical Line
+    div.row#dashboards
       div.col-lg-12
         div.row
-          div.col-lg-4.tile(draggable='true')
+          div.col-lg-2.tile(draggable='true')
             h2 A This is the First One
           div.col-lg-4.tile(draggable='true')
             h2 B the second
           div.col-lg-4.tile(draggable='true')
             h2 C el tercero 
+          div.col-lg-2.tile#new(draggable='true')
+            h2 Hidden
+
   script(type='text/javascript', src='/javascripts/arrangeTiles.js')
   
     

@@ -19,7 +19,7 @@ html {
 	min-height:750px;
 }
 
-.navbar-nav {
+.navbar-nav, .nav-pills{
 	font-size:1.1em;
 }
 
@@ -95,7 +95,7 @@ a {
 
 .row [class*="col-lg-"] {
 	min-height:200px;
-	background-color:white;
+	
 }
 
 /*------------------------------------------- home page ---------------------------------------------------------*/
@@ -242,7 +242,7 @@ caption {
 }
 
 .tile {
-	
+	background-color:white;
 }
 
 .tile [class*="span"] {
@@ -300,4 +300,19 @@ caption {
 	border-bottom:none;
 	border-bottom:1px #ccc solid;
 	font-weight:400;
+}
+
+.source {
+	-webkit-transform:scale(0.8);
+	-webkit-transition: all .2s ease-in-out;
+}
+
+.nav-pills {
+	margin-top:9px;
+}
+
+.nav-pills li>a{
+	color:#666;
+	padding-top:5px;
+	padding-bottom:5px;
 }

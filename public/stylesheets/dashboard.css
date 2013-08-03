@@ -3,14 +3,25 @@ body {
 	background-color: rgb(234, 234, 234);	
 }
 
-#account {
+#account, #tilePicker {
   height:40px;
   min-height:30px;
   background-color: white;
   color:white;
   border-bottom:#ccc solid 1px;
+  border-radius:0;
 }
-#account i {
+
+#tilePicker {
+  border-top:1px #ccc solid;
+  margin-top:-22px;
+}
+
+#tilePicker .navbar-nav {
+
+}
+
+#account i, #tilePicker i {
   margin-right:5px;
 }
 #account .container, .pull-right, ul, li {
@@ -43,4 +54,8 @@ body {
 
 .over {
   border:5px dotted black;
+}
+
+#new {
+  display:none;
 }
