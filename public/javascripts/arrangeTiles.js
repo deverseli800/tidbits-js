@@ -13,16 +13,14 @@ function handleDragCreate(e) {
 
   //give that element the tile class 
   newEl.classList.add("tile");
-  newEl.classList.add("col-lg-4");
+  newEl.classList.add("col-lg-12");
+
   //make this bitch draggable 
   var attrib= document.createAttribute('draggable');
   attrib.value="true";
   newEl.setAttributeNode(attrib);
   //add the innerHTML of the div we want
-  //var node=document.createTextNode("This is a new paragraph.");
-
- // newEl.appendChild(node);
-  newEl.innerHTML="<button>blah</button>";
+  newEl.innerHTML="<div class='tileHead'><div class='type'><i class='icon-bar-chart'></i></div>Orderbook<div class='options'><div class='option'><i class='icon-remove'></i></div></div></div><canvas id='myChart' width=1200 height=350></canvas>";
 
   //set our dataTransfer options
   e.dataTransfer.effectAllowed = 'move';
@@ -63,10 +61,13 @@ function handleDrop(e) {
     newEl=null;
   }
   else if((dragSrcEl!= this)||(dragSrcEl != newEl)){
+    //source element takes innerHTML of element it is dropping on to
     dragSrcEl.innerHTML = this.innerHTML;
     
     //handle different size columns by storing class attributes 
     var srcClass=this.className;
+
+    //the element being dropped on 
     this.className=dragSrcEl.className;
     dragSrcEl.className=srcClass;
     this.classList.remove('source');

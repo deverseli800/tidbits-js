@@ -51,7 +51,7 @@ block content
         div.pull-right
           ul.nav.navbar-nav
            li
-              a(href="/") 
+              a.newTile(href="/") 
                 i.icon-bar-chart
                 | Spot Prices
             li 
@@ -64,14 +64,14 @@ block content
                 | Orderbook Historical Line
   div.container(ng-controller="GraphDataController")   
     div.row#placeForm
-      div.col-lg-12.tile(draggable="true", ng-class="{ 'hidden': orderFormHide }")
+      div.col-lg-12.tile(draggable="true", ng-class="{ 'hidden': spotPriceGraphHide }")
         div.tileHead 
           div.type
             i.icon-bar-chart
           | Place Order
           div.options
             div.option
-              i.icon-remove(ng-click="orderFormHide = ! orderFormHide")    
+              i.icon-remove(ng-click="spotPriceGraphHide = ! spotPriceGraphHide")    
         form.form-inline(ng-controller="SampleController", ng-init="setUser( #{JSON.stringify(user)} )")
           label Price
           input(type="number", ng-model="order.price")
@@ -83,14 +83,14 @@ block content
           | {{order.expiry}} {{user.username}}
           div.btn.btn-warning(ng-click="submit()", style="cursor: pointer; background-color: orange; width: 100px") Submit
     div.row
-      div.col-lg-12.tile(draggable="true")
+      div.col-lg-12.tile(draggable="true", ng-class="{ 'hidden': orderFormHide }")
         div.tileHead 
           div.type
             i.icon-bar-chart
           |Orderbook
           div.options
             div.option
-              i.icon-cog       
+              i.icon-remove(ng-click="orderFormHide = ! orderFormHide")       
         canvas#myChart(width=1200, height=350, id="myChart")
     div.row
       div.col-lg-12
