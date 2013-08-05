@@ -1,20 +1,39 @@
 var dragSrcEl= null;
 var newEl=null;
+
 function handleDragCreate(e) {
-  newEl=document.createElement('h2');
-  var node=document.createTextNode("This is a new paragraph.");
-  newEl.appendChild(node);
+  //make a new DOM element
+  newEl=document.createElement("div");
+
+  //give that element the tile class 
+  newEl.classList.add("tile");
+  newEl.classList.add("col-lg-4");
+  //make this bitch draggable 
+  var attrib= document.createAttribute('draggable');
+  attrib.value="true";
+  newEl.setAttributeNode(attrib);
+  //add the innerHTML of the div we want
+  //var node=document.createTextNode("This is a new paragraph.");
+
+ // newEl.appendChild(node);
+  newEl.innerHTML="<button>blah</button>";
+
+  //set our dataTransfer options
   e.dataTransfer.effectAllowed = 'move';
   e.dataTransfer.setData('text/html', newEl.innerHTML);
+
+  //the other functions take this as a parameter so we should 
+  //set our element to equal the dragSrcEl 
   dragSrcEl=newEl;
-  //alert(dragSrcEl.innerHTML);
-  //comment to test github
+ 
 }
+
 function handleNewDrop(e) {
   var element=document.getElementById("dashboard");
   element.appendChild(newEl);
   alert(newEl);
 }
+
 function handleDragStart(e) {
   this.style.opacity = '0.5';  // this / e.target is the source node.
   this.classList.add('source');
@@ -24,6 +43,7 @@ function handleDragStart(e) {
 }
 function handleDragOver(e) {
   e.preventDefault();
+
 }
 function handleDragEnter(e) {
   this.classList.add('over');
@@ -37,14 +57,19 @@ function handleDragEnd(e) {
   this.style.opacity='1.0';
 }
 function handleDrop(e) {
- // if(dragSrcEl!= this){
-   //dragSrcEl.innerHTML = this.innerHTML;/
-   //this.innerHTML = e.dataTransfer.getData('text/html');
-  //}
   if(dragSrcEl==newEl) {
-    var element=document.getElementById("dashboards");
+    var element=this.parentNode;
     element.appendChild(newEl);
+    alert('new');
+    newEl=null;
+    dragSrcEl=null;
+
   }
+  else if((dragSrcEl!= this)||(dragSrcEl != newEl)){
+    dragSrcEl.innerHTML = this.innerHTML;
+    this.innerHTML = e.dataTransfer.getData('text/html');
+    }
+  
   this.classList.remove('over');
 }
 
