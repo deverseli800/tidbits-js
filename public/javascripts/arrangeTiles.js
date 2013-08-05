@@ -4,6 +4,12 @@ var newEl=null;
 function handleDragCreate(e) {
   //make a new DOM element
   newEl=document.createElement("div");
+  newEl.addEventListener('dragstart', handleDragStart,false);
+  newEl.addEventListener('dragenter', handleDragEnter, false);
+  newEl.addEventListener('dragleave', handleDragLeave, false);
+  newEl.addEventListener('dragover', handleDragOver, false);
+  newEl.addEventListener('dragend', handleDragEnd, false);
+  newEl.addEventListener('drop', handleDrop, false);
 
   //give that element the tile class 
   newEl.classList.add("tile");
@@ -26,12 +32,6 @@ function handleDragCreate(e) {
   //set our element to equal the dragSrcEl 
   dragSrcEl=newEl;
  
-}
-
-function handleNewDrop(e) {
-  var element=document.getElementById("dashboard");
-  element.appendChild(newEl);
-  alert(newEl);
 }
 
 function handleDragStart(e) {
@@ -60,14 +60,18 @@ function handleDrop(e) {
   if(dragSrcEl==newEl) {
     var element=this.parentNode;
     element.appendChild(newEl);
-    alert('new');
     newEl=null;
-    dragSrcEl=null;
-
   }
   else if((dragSrcEl!= this)||(dragSrcEl != newEl)){
     dragSrcEl.innerHTML = this.innerHTML;
+    
+    //handle different size columns by storing class attributes 
+    var srcClass=this.className;
+    this.className=dragSrcEl.className;
+    dragSrcEl.className=srcClass;
+    this.classList.remove('source');
     this.innerHTML = e.dataTransfer.getData('text/html');
+
     }
   
   this.classList.remove('over');
