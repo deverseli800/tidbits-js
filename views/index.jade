@@ -5,7 +5,7 @@ block content
     div.clockMeshBackground
     div.row#clockMeshWrap
       img#clockMeshImg(src='/images/clockMesh.png')
-      div.leadingText(ng-class="{ 'hidden': hideMe }")
+      div.leadingText(ng-class="{ 'hidden' :  hideMe }")
         div.leadTitle 
          h2 Bitcoin Derivatives Trading
         div.leadText 
@@ -13,9 +13,26 @@ block content
             br 
             | price risk or simply play the market. 
         div.invite
-          a(ng-click="hideMe = ! hideMe; showMe = ! showMe;").request 
-            h5 Request invite
-      div.leadingText(style=" display: none", ng-class="{ 'showMe' : showMe}") 
+          a(ng-click=" hideMe = ! hideMe; showMe = ! showMe").request 
+            h5 Request invite 
+      div.leadingText(ng-class="{ 'hidden' : !  showMe }")
+        h2.leadTitle Sign Up  
+        div.leadText
+          | We'll email you as soon as we're ready. 
+          br
+        br
+        form.form-horizontal.signUp(method="POST", action="/subscribe")
+          label.control-label Name 
+          div.controls
+            input(type="text", placeholder="name", name="name")
+          br
+          label.control-label Email Address
+          div.controls
+            input(type="text", placeholder="your email", name="email")
+          div.controls
+            br
+            button#demo.invite Submit  
+      div.leadingText(style="display:none") 
         div.leadTitle 
          h2 Sign Up 
         div.leadText

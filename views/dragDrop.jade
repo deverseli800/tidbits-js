@@ -50,6 +50,13 @@ block content
             h2 B the second
           div.col-lg-2.tile(draggable='true')
             h2 C el tercero 
+    div.row
+      div.col-lg-2(ng-class="myVar")
+        h2 You love me and kobe
+      div.col-lg-2 
+        button.btn(ng-click="myVar='my-class'") Set
+      div.col-lg-2
+        button.btn(ng-click="myVar=''") Clear
 
   script(type='text/javascript', src='/javascripts/arrangeTiles.js')
   
