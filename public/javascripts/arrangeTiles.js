@@ -8,6 +8,7 @@ function handleDragCreate(e) {
   e.dataTransfer.setData('text/html', newEl.innerHTML);
   dragSrcEl=newEl;
   //alert(dragSrcEl.innerHTML);
+  //comment to test github
 }
 function handleNewDrop(e) {
   var element=document.getElementById("dashboard");
