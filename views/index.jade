@@ -22,16 +22,13 @@ block content
           br
         br
         form.form-horizontal.signUp(method="POST", action="/subscribe")
-          label.control-label Name 
-          div.controls
-            input(type="text", placeholder="name", name="name")
-          br
-          label.control-label Email Address
-          div.controls
-            input(type="text", placeholder="your email", name="email")
-          div.controls
-            br
-            button#demo.invite Submit  
+          div.form-group
+            label(for="name") Name 
+            input.form-control(type="text", placeholder="name", name="name")
+          div.form-group
+            label(for="email") Email Address
+            input.form-control(type="text", placeholder="your email", name="email")
+            button.btn#demo.invite Submit  
       div.leadingText(style="display:none") 
         div.leadTitle 
          h2 Sign Up 
