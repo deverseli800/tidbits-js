@@ -62,7 +62,19 @@ block content
               a(href="/") 
                 i.icon-bar-chart
                 | Orderbook Historical Line
-  div.container(ng-controller="GraphDataController")   
+  div.row(ng-controller="HistoricalDataController")
+      div.col-lg-12
+       div.tileHead 
+        div.type
+          i.icon-bar-chart
+        | Place Order
+        div.options
+          div.option
+            i.icon-remove
+        ul
+          li 
+  div.container(ng-controller="GraphDataController")  
+    
     div.row#placeForm
       div.col-lg-12.tile(draggable="true", ng-class="{ 'hidden': spotPriceGraphHide }")
         div.tileHead 

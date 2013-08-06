@@ -126,7 +126,12 @@ function heatMap(dataArray) {
 
       }
     }
-
+function HistoricalDataController($scope, $http) {
+  var url='http://ec2-23-22-142-91.compute-1.amazonaws.com:1337/bbo.jsonpcallback=JSON_CALLBACK';
+  $http.jsonp(url).success(function(data) {
+    console.log(data);
+  });
+}
 function GraphDataController($scope, $http) {
   // Open orders
   $scope.orders = {
