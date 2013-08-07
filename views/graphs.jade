@@ -3,6 +3,7 @@ extends layout
 block head 
   link(rel='stylesheet', href='/stylesheets/dashboard.css')
   script(type='text/javascript', src='/javascripts/showHideController.js')
+  
   script(type="text/javascript")
     function SampleController($scope, $http) {
       $scope.order = {
@@ -24,6 +25,7 @@ block head
         });
       };
     }
+  
   
 block content
   div.navbar#account
@@ -72,7 +74,7 @@ block content
           div.option
             i.icon-remove
         ul
-          li 
+          li
   div.container(ng-controller="GraphDataController")  
     
     div.row#placeForm
