@@ -66,30 +66,30 @@ block head
 block content
   div.navbar#account
       div.container
-        div.pull-right
+        div.pull-right.tabbable.tabs-below
           ul.nav.nav-pills
-           li.active
-              a(href="#", ng-click="hideGraphMenu = ! hideGraphMenu")
+           li(ng-class="{active: selectedTab==1}")
+              a(href="#", ng-click="selectedTab=1;")
                 i.icon-bar-chart
-                | Graphs
-            li 
-              a(href="/") 
+                | Graph Tiles
+            li(ng-class="{active: selectedTab==2}") 
+              a(href="#", ng-click="selectedTab=2;") 
                 i.icon-table
-                | Tables
-            li 
-              a(href="/graphs") 
+                | Table Tiles
+            li(ng-class="{active: selectedTab==3}")
+              a(href="#", ng-click="selectedTab=3;") 
                 i.icon-info-sign
-                | Ticks
-            li 
-              a(href="/team")
+                | Tick Tiles
+            li(ng-class="{active: selectedTab==4}")
+              a(href="#", ng-click="selectedTab=4;")
                 i.icon-wrench
-                | Tools
-  div.navbar#tilePicker(ng-class="{'hidden': hideGraphMenu}")
+                | Tool Tiles 
+  div.navbar.tilePicker(ng-show="selectedTab==1;")
       div.container
         div.pull-right
           ul.nav.navbar-nav
            li
-              a.newTile(href="/") 
+              a.newTile(href="#") 
                 i.icon-bar-chart
                 | Spot Prices
             li 
@@ -100,6 +100,46 @@ block content
               a(href="/") 
                 i.icon-bar-chart
                 | Orderbook Historical Line
+  div.navbar.tilePicker(ng-show="selectedTab==3;")
+      div.container
+        div.pull-right
+          ul.nav.navbar-nav
+           li
+              a.newTile(href="#") 
+                i.icon-info-sign
+                | Mt. Gox Bid
+            li 
+              a(href="/") 
+                i.icon-info-sign
+                | Mt. Gox Ask
+            li 
+              a(href="/") 
+                i.icon-info-sign
+                | Mt. Gox Bid/Ask Spread
+    div.navbar.tilePicker(ng-show="selectedTab==2;")
+      div.container
+        div.pull-right
+          ul.nav.navbar-nav
+           li
+              a.newTile(href="#") 
+                i.icon-table
+                | Orderbook
+            li 
+              a(href="/") 
+                i.icon-table
+                | Buy Orders
+            li 
+              a(href="/") 
+                i.icon-table
+                | Sell Orders
+    div.navbar.tilePicker(ng-show="selectedTab==4;")
+      div.container
+        div.pull-right
+          ul.nav.navbar-nav
+           li
+              a.newTile(href="#") 
+                i.icon-wrench
+                | Hedge Calculator
   div.container(ng-controller="GraphDataController")  
     div.row#placeForm
       div.col-lg-12.tile(draggable="true", ng-class="{ 'hidden': spotPriceGraphHide }")
