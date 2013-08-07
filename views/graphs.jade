@@ -3,8 +3,43 @@ extends layout
 block head 
   link(rel='stylesheet', href='/stylesheets/dashboard.css')
   script(type='text/javascript', src='/javascripts/showHideController.js')
-  
   script(type="text/javascript")
+    $(document).ready(function() {
+      $.getJSON('http://ec2-23-22-142-91.compute-1.amazonaws.com:1337/bbo.jsonp?callback=?', function(dataUnformattedWrap) {
+        var dataUnformatted = dataUnformattedWrap.data;
+        var dataBuy = [];
+        var dataSell = [];
+        for (var i = 0; i < dataUnformatted.length; ++i) {
+          var d = new Date(dataUnformatted[i].time);
+          dataBuy.push([d.getTime(), dataUnformatted[i].price.buy]);
+          dataSell.push([d.getTime(), dataUnformatted[i].price.sell]);
+        }
+        
+        $('#stockChart').highcharts('StockChart', {
+          rangeSelector : {
+            selected : 1
+          },
+
+          title : {
+            text : 'Bitcoin stock price'
+          },
+          
+          series : [{
+            name : 'Buy',
+            data : dataBuy,
+            tooltip : {
+              valueDecimals : 2
+            }
+          }, {
+            name : 'Sell',
+            data : dataSell,
+            tooltip : {
+              valueDecimals : 2
+            }
+          }]
+        });
+      });
+    });
     function SampleController($scope, $http) {
       $scope.order = {
         price : 0,
@@ -25,6 +60,7 @@ block head
         });
       };
     }
+  
   
   
 block content
@@ -75,6 +111,7 @@ block content
             i.icon-remove
         ul
           li
+       div#stockChart(width="800", height="600")
   div.container(ng-controller="GraphDataController")  
     
     div.row#placeForm
