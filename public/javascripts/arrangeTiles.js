@@ -20,7 +20,7 @@ function handleDragCreate(e) {
   attrib.value="true";
   newEl.setAttributeNode(attrib);
   //add the innerHTML of the div we want
-  newEl.innerHTML="<div class='tileHead'><div class='type'><i class='icon-bar-chart'></i></div>Orderbook<div class='options'><div class='option'><i class='icon-remove'></i></div></div></div><canvas id='myChart' width=1200 height=350></canvas>";
+  newEl.innerHTML="<div class='tileHead'><div class='type'><i class='icon-bar-chart'></i></div>Real Time Spot Prices<div class='options'><div class='option'><i class='icon-remove'></i></div></div></div><canvas id='myChart' width=1200 height=350></canvas>";
 
   //set our dataTransfer options
   e.dataTransfer.effectAllowed = 'move';

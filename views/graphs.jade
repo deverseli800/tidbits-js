@@ -100,20 +100,7 @@ block content
               a(href="/") 
                 i.icon-bar-chart
                 | Orderbook Historical Line
-  div.row(ng-controller="HistoricalDataController")
-      div.col-lg-12
-       div.tileHead 
-        div.type
-          i.icon-bar-chart
-        | Place Order
-        div.options
-          div.option
-            i.icon-remove
-        ul
-          li
-       div#stockChart(width="800", height="600")
   div.container(ng-controller="GraphDataController")  
-    
     div.row#placeForm
       div.col-lg-12.tile(draggable="true", ng-class="{ 'hidden': spotPriceGraphHide }")
         div.tileHead 
@@ -133,6 +120,16 @@ block content
           | Expiry
           | {{order.expiry}} {{user.username}}
           div.btn.btn-warning(ng-click="submit()", style="cursor: pointer; background-color: orange; width: 100px") Submit
+    div.row(ng-controller="HistoricalDataController")
+      div.col-lg-12.tile
+       div.tileHead 
+        div.type
+          i.icon-bar-chart
+        | Historical Spot Prices
+        div.options
+          div.option
+            i.icon-remove
+       div#stockChart(width="1170", height="600")
     div.row
       div.col-lg-12.tile(draggable="true", ng-class="{ 'hidden': orderFormHide }")
         div.tileHead 
